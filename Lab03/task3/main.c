@@ -10,7 +10,7 @@ void main()
 {
 	setlocale(LC_ALL, "RUS");
 	int a, b;
-	printf("Введите a и b: ");
+	printf("Р’РІРµРґРёС‚Рµ a Рё b: ");
 	scanf("%d %d", &a, &b);
 	printf("___________________\n");
     printf("| a*b | a+b | a-b |\n");
