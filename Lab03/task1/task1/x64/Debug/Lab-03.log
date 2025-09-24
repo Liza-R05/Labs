@@ -1,0 +1,13 @@
+﻿  main.c
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(12,8): warning C4477: "scanf": в строке форматирования "%d" требуется аргумент типа "int *", но вариативный аргумент "1" имеет тип "float *"
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(13,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "double"
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(16,8): warning C4477: "scanf": в строке форматирования "%d" требуется аргумент типа "int *", но вариативный аргумент "1" имеет тип "float *"
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(17,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "double"
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(22,123): error C2296: "%": недопустимо, поскольку тип левого операнда — "float"
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(22,123): error C2297: "%": недопустимо, поскольку тип правого операнда — "float"
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(22,9): warning C4473: "printf": передано недостаточно аргументов для строки формата
+      C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(22,9):
+      заполнители и их параметры ожидают переменное число аргументов в количестве 3, но было предоставлено 2
+      C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-03\main.c(22,9):
+      отсутствующий вариативный аргумент "3" требуется для строки форматирования "%f"
+  
