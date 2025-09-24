@@ -11,16 +11,16 @@ void main()
 	setlocale(LC_ALL, "RUS");
 	int dym;
 	float result1;
-	puts("Введите число: ");
+	puts("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ: ");
 	scanf("%d", &dym);
-	printf("Введено число: %d \n\n", dym);
+	printf("Р’РІРµРґРµРЅРѕ С‡РёСЃР»Рѕ: %d \n\n", dym);
 	result1 = D * dym;
-	printf("%d дюймов – это %.1f см\n\n", dym, result1);
+	printf("%d РґСЋР№РјРѕРІ вЂ“ СЌС‚Рѕ %.1f СЃРј\n\n", dym, result1);
 	int pulgada;
 	float result2;
-	puts("Введите число: ");
+	puts("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ: ");
 	scanf("%d", &pulgada);
-	printf("Введено число: %d \n\n", pulgada);
+	printf("Р’РІРµРґРµРЅРѕ С‡РёСЃР»Рѕ: %d \n\n", pulgada);
 	result2 = A * pulgada;
-	printf("%d испанских дюймов – это %.1f см\n\n", pulgada, result2);
+	printf("%d РёСЃРїР°РЅСЃРєРёС… РґСЋР№РјРѕРІ вЂ“ СЌС‚Рѕ %.1f СЃРј\n\n", pulgada, result2);
 }
