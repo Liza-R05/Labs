@@ -1,0 +1,5 @@
+﻿  main.c
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\task2\main.c(11,14): warning C4101: a: неиспользованная локальная переменная
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\task2\main.c(11,17): warning C4101: b: неиспользованная локальная переменная
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\task2\main.c(11,11): warning C4101: y: неиспользованная локальная переменная
+  task2.vcxproj -> C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\Lab-04\x64\Debug\task2.exe
