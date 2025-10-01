@@ -9,14 +9,14 @@ void main()
 {
 	setlocale(LC_ALL, "RUS");
 	float x, y, a, b;
-	printf("Введите значение х: ");
+	printf("Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ С…: ");
 	scanf("%f", &x);
 	printf("\nx=%.1f", x);
 	printf("\n=======================================\n");
-	printf("\nПроведем рассчеты и найдем у");
-	printf("\n1) Неизвестная b = %.1f", log10(fabs(k*x)));
-	printf("\n1) Неизвестная a = %.1f", pow(k+x,3));
-	printf("\n1) Неизвестная y = %.3f", pow(log10(fabs(k * x)),2)+sqrt(fabs(pow(k + x, 3))));
+	printf("\nРџСЂРѕРІРµРґРµРј СЂР°СЃСЃС‡РµС‚С‹ Рё РЅР°Р№РґРµРј Сѓ");
+	printf("\n1) РќРµРёР·РІРµСЃС‚РЅР°СЏ b = %.1f", log10(fabs(k*x)));
+	printf("\n1) РќРµРёР·РІРµСЃС‚РЅР°СЏ a = %.1f", pow(k+x,3));
+	printf("\n1) РќРµРёР·РІРµСЃС‚РЅР°СЏ y = %.3f", pow(log10(fabs(k * x)),2)+sqrt(fabs(pow(k + x, 3))));
 	printf("\n=======================================\n");
 	getchar();
 }
