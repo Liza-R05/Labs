@@ -9,8 +9,8 @@ void main()
 {
 	setlocale(LC_ALL, "RUS");
 	float gr;
-	printf("Введите градус: ");
+	printf("Р’РІРµРґРёС‚Рµ РіСЂР°РґСѓСЃ: ");
 	scanf("%f", &gr);
-	printf("Результат: синус %.1f градусов = %1.20f\n\n", gr, sin(gr*M_PI/180));
+	printf("Р РµР·СѓР»СЊС‚Р°С‚: СЃРёРЅСѓСЃ %.1f РіСЂР°РґСѓСЃРѕРІ = %1.20f\n\n", gr, sin(gr*M_PI/180));
 	getchar();
 }
