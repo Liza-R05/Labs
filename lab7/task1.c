@@ -1,0 +1,27 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <stdlib.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
+void main()
+{
+	setlocale(LC_ALL, "RUS");
+	char c;
+	printf("Введите букву ИЛИ цифру: ");
+	scanf("%c", &c);
+	switch (c)
+	{
+	case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h': case 'i': case 'j': case 'k': 
+	case 'l': case 'm': case 'n': case 'o': case 'p': case 'q': case 'r': case 's': case 't': case 'u': case 'v':
+	case 'w': case 'x': case 'y': case 'z':
+		printf("Введена 'буква'.\n");
+		break;
+	case '0' : case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
+		printf("Введена 'цифра'.\n");
+		break;
+	default:
+		printf("НЕ буква и НЕ цифра\n");
+	}
+	return 0;
+}
