@@ -1,0 +1,6 @@
+﻿  task3.c
+C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\task3\task3.c(55,62): warning C4474: "printf" : для строки формата передано слишком много аргументов
+      C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\task3\task3.c(55,62):
+      заполнители и их параметры ожидают переменное число аргументов в количестве 0, но было предоставлено 1
+  
+  task3.vcxproj -> C:\Users\Lenta_SV\OneDrive\Desktop\ВУЗ no shkola\прога\lab7\x64\Debug\task3.exe
