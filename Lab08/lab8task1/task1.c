@@ -9,13 +9,13 @@ void main()
 	setlocale(LC_ALL, "RUS");
 	int n, m, s = 0;
 	int k = 1;
-	printf("Введите значения n, m: \n");
+	printf("Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёСЏ n, m: \n");
 	scanf("%d%d", &n, &m);
 	for (int i = m; i >= n; i--)
 	{
 		s += i;
-		printf("выполнено %d раз\n", k++);
+		printf("РІС‹РїРѕР»РЅРµРЅРѕ %d СЂР°Р·\n", k++);
 	}
-	printf("результат %d\n", s);
+	printf("СЂРµР·СѓР»СЊС‚Р°С‚ %d\n", s);
 	system("pause");
 }
