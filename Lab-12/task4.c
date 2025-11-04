@@ -25,7 +25,7 @@ void main()
 		ptr_a += 2;
 	}
 	printf("\n");
-	ptr_a = &array[9]; // èäóò ñ íóëÿ
+	ptr_a = &array[9]; // Ð¸Ð´ÑƒÑ‚ Ñ Ð½ÑƒÐ»Ñ
 	for (int i = 9; i >= 0; i--) 
 	{
 		printf("ptr_a = %p, *ptr_a = %.1f\n", ptr_a, *ptr_a);
