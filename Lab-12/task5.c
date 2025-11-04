@@ -2,6 +2,15 @@
 #include <stdio.h>
 #include <locale.h>
 #include <stdlib.h>
+void show_bytes(void* var, int size)
+{
+	unsigned char* bytes = (unsigned char*)var;
+	for (int i = 0; i < size; i++)
+	{
+		printf("%.2x ", bytes[i]);
+	}
+	printf("\n");
+}
 void main()
 {
 	setlocale(LC_ALL, "RUS");
@@ -24,6 +33,18 @@ void main()
 	{
 		printf("Система использует Little-endian\n");
 	}
-
+	int i = 12345;
+	float f = 12345.0f;
+	double d = 12345.0;
+	printf("\n\nint:    %d\n", i);
+	printf("float:  %.1f\n", f);
+	printf("double: %.1f\n\n", d);
+	printf("int:    ");
+	show_bytes(&i, sizeof(i));
+	printf("float:  ");
+	show_bytes(&f, sizeof(f));
+	printf("double: ");
+	show_bytes(&d, sizeof(d));
+	printf("\n");
 	system("pause");
 }
