@@ -18,11 +18,11 @@ void main()
 	printf("%.2x\n%.2x\n%.2x\n%.2x\n", *a1, *a2, *a3, *a4);
 	if (*a1 == 0x12 && *a4 == 0x78)
 	{
-		printf("Система использует Big-endian\n");
+		printf("РЎРёСЃС‚РµРјР° РёСЃРїРѕР»СЊР·СѓРµС‚ Big-endian\n");
 	}
 	else
 	{
-		printf("Система использует Little-endian\n");
+		printf("РЎРёСЃС‚РµРјР° РёСЃРїРѕР»СЊР·СѓРµС‚ Little-endian\n");
 	}
 
 	system("pause");
