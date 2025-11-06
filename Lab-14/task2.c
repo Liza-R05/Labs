@@ -14,13 +14,13 @@ double* full_elements(double* ptr_array, int n)
 }
 int put_elements(double* ptr_array, int n)
 {
-    printf("Элементы массива:\n");
+    printf("Р­Р»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР°:\n");
     for (int i = 0; i < n; i++)
     {
         printf("[%d] = %.2f\n", i, ptr_array[i]);
     }
 }
-// 1 вычисления суммы элементов от begin до end включительно
+// 1 РІС‹С‡РёСЃР»РµРЅРёСЏ СЃСѓРјРјС‹ СЌР»РµРјРµРЅС‚РѕРІ РѕС‚ begin РґРѕ end РІРєР»СЋС‡РёС‚РµР»СЊРЅРѕ
 double sum_elements(double* ptr_array, int begin, int end) 
 {
     double sum = 0.0;
@@ -30,17 +30,17 @@ double sum_elements(double* ptr_array, int begin, int end)
     }
     return sum;
 }
-// 2 поиск элемента равного a
+// 2 РїРѕРёСЃРє СЌР»РµРјРµРЅС‚Р° СЂР°РІРЅРѕРіРѕ a
 int find_element(double* ptr_array, int n, double element) 
 {
     for (int i = 0; i < n; i++) 
     {
         if (ptr_array[i] == element) 
         {
-            return i;  // индекс найденного элемента
+            return i;  // РёРЅРґРµРєСЃ РЅР°Р№РґРµРЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
         }
     }
-    return -1;  // не найден
+    return -1;  // РЅРµ РЅР°Р№РґРµРЅ
 }
 void main()
 {
@@ -49,27 +49,27 @@ void main()
     int size;
     int begin, end;
     double a;
-    printf("Введите размер массива > ");
+    printf("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР° > ");
     scanf("%d", &size);
     full_elements(array, size);
     put_elements(array, size);
     printf("\n");
-    printf("Введите начальный индекс> ");
+    printf("Р’РІРµРґРёС‚Рµ РЅР°С‡Р°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ> ");
     scanf("%d", &begin);
-    printf("Введите конечный индекс > ");
+    printf("Р’РІРµРґРёС‚Рµ РєРѕРЅРµС‡РЅС‹Р№ РёРЅРґРµРєСЃ > ");
     scanf("%d", &end);
     double sum = sum_elements(array, begin, end);
-    printf("Сумма элементов от [%d] до [%d] = %.2f\n\n", begin, end, sum);
-    printf("Введите элемент для поиска > ");
+    printf("РЎСѓРјРјР° СЌР»РµРјРµРЅС‚РѕРІ РѕС‚ [%d] РґРѕ [%d] = %.2f\n\n", begin, end, sum);
+    printf("Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚ РґР»СЏ РїРѕРёСЃРєР° > ");
     scanf(" %lf", &a);
     int b = find_element(array, size, a);
     if (b != -1) 
     {
-        printf("Элемент %.2f найден по индексу %d\n", a, b);
+        printf("Р­Р»РµРјРµРЅС‚ %.2f РЅР°Р№РґРµРЅ РїРѕ РёРЅРґРµРєСЃСѓ %d\n", a, b);
     }
     else 
     {
-        printf("Элемент %.2f не найден\n", a);
+        printf("Р­Р»РµРјРµРЅС‚ %.2f РЅРµ РЅР°Р№РґРµРЅ\n", a);
     }
     system("pause");
 }
