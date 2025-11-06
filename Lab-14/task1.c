@@ -13,13 +13,13 @@ double* full_elements(double* ptr_array, int n) // x^3 + 2x
 }
 int put_elements(double* ptr_array, int n) 
 {
-    printf("Элементы массива:\n");
+    printf("Р­Р»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР°:\n");
     for (int i = 0; i < n; i++) 
     {
         printf("[%d] = %.2f\n", i, ptr_array[i]);
     }
 }
-double* calc_elements(double* ptr_array, int n) // возведение в квадрат
+double* calc_elements(double* ptr_array, int n) // РІРѕР·РІРµРґРµРЅРёРµ РІ РєРІР°РґСЂР°С‚
 {
     for (int i = 0; i < n; i++) 
     {
@@ -32,7 +32,7 @@ void main()
     setlocale(LC_ALL, "RUS");
     double array[N];
     int size;
-    printf("Введите размер массива > \n");
+    printf("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР° > \n");
     scanf("%d", &size);
     full_elements(array, size);
     put_elements(array, size);
