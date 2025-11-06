@@ -14,13 +14,13 @@ double* full_elements(double* ptr_array, int n)
 }
 int put_elements(double* ptr_array, int n)
 {
-    printf("Элементы массива:\n");
+    printf("Р­Р»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР°:\n");
     for (int i = 0; i < n; i++)
     {
         printf("[%d] = %.2f\n", i, ptr_array[i]);
     }
 }
-// Функция определения максимального значения в интервале [K, M]
+// Р¤СѓРЅРєС†РёСЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РІ РёРЅС‚РµСЂРІР°Р»Рµ [K, M]
 double find_max_in_interval(double* ptr_array, int n, int K, int M) 
 {
     double max = ptr_array[K];
@@ -39,15 +39,15 @@ void main()
     double array[N];
     int size;
     int K, M;
-    printf("Введите размер массива > ");
+    printf("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР° > ");
     scanf("%d", &size);
     full_elements(array, size);
     put_elements(array, size);
-    printf("Введите начало интервала K > ");
+    printf("Р’РІРµРґРёС‚Рµ РЅР°С‡Р°Р»Рѕ РёРЅС‚РµСЂРІР°Р»Р° K > ");
     scanf("%d", &K);
-    printf("Введите конец интервала M > ");
+    printf("Р’РІРµРґРёС‚Рµ РєРѕРЅРµС† РёРЅС‚РµСЂРІР°Р»Р° M > ");
     scanf("%d", &M);
     double a = find_max_in_interval(array, size, K, M);
-    printf("Максимальное значение в интервале > %.2f\n", a);
+    printf("РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РІ РёРЅС‚РµСЂРІР°Р»Рµ > %.2f\n", a);
     system("pause");
 }
