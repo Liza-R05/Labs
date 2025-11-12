@@ -4,7 +4,7 @@
 #include <locale.h>
 #include <time.h>
 
-// заполнение массива случайными числами от -1 до 1
+// Р·Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё РѕС‚ -1 РґРѕ 1
 double* full_elements(double* ptr_array, int n) 
 {
     for (int i = 0; i < n; i++) 
@@ -14,7 +14,7 @@ double* full_elements(double* ptr_array, int n)
     return ptr_array;
 }
 
-// печать элементов массива
+// РїРµС‡Р°С‚СЊ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°
 int put_elements(double* ptr_array, int n) 
 {
     for (int i = 0; i < n; i++) 
@@ -24,7 +24,7 @@ int put_elements(double* ptr_array, int n)
     return n;
 }
 
-// обработка элементов массива (возведение в квадрат - вариант 4)
+// РѕР±СЂР°Р±РѕС‚РєР° СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° (РІРѕР·РІРµРґРµРЅРёРµ РІ РєРІР°РґСЂР°С‚ - РІР°СЂРёР°РЅС‚ 4)
 double* calc_elements(double* ptr_array, int n) 
 {
     for (int i = 0; i < n; i++) 
@@ -40,7 +40,7 @@ void main()
     srand(time(NULL));
     double* ptr_array;
     int size;
-    printf("Введите размер массива: ");
+    printf("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ");
     scanf("%d", &size);
     ptr_array = (double*)malloc(size * sizeof(double));
     if (ptr_array == NULL) 
@@ -61,9 +61,9 @@ void main()
         result_array[i] = ptr_array[i];
     }
     calc_elements(result_array, size);
-    printf("\nИсходный массив:\n");
+    printf("\nРСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ:\n");
     put_elements(ptr_array, size);
-    printf("\nПреобразованный массив:\n");
+    printf("\nРџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРЅС‹Р№ РјР°СЃСЃРёРІ:\n");
     put_elements(result_array, size);
     free(ptr_array);
     free(result_array);
