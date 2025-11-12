@@ -7,15 +7,15 @@ void main() {
     setlocale(LC_ALL, "RUS");
     int m = 1 + rand() % 10;
     int k;
-    printf("Угадайте число (1-10): ");
+    printf("РЈРіР°РґР°Р№С‚Рµ С‡РёСЃР»Рѕ (1-10): ");
     scanf("%d", &k);
     if (k == m) 
     {
-        printf("Угадано число %d!\n", m);
+        printf("РЈРіР°РґР°РЅРѕ С‡РёСЃР»Рѕ %d!\n", m);
     }
     else 
     {
-        printf("Число %d не было угадано\n", m);
+        printf("Р§РёСЃР»Рѕ %d РЅРµ Р±С‹Р»Рѕ СѓРіР°РґР°РЅРѕ\n", m);
     }
     system("pause");
 }
