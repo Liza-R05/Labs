@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <locale.h>
 
-// заполнение массива случайными числами от -1 до 1
+// Р·Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё РѕС‚ -1 РґРѕ 1
 double* full_elements(double* ptr_array, int n) 
 {
     for (int i = 0; i < n; i++) 
@@ -12,7 +12,7 @@ double* full_elements(double* ptr_array, int n)
     }
     return ptr_array;
 }
-// печать элементов массива
+// РїРµС‡Р°С‚СЊ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°
 int put_elements(double* ptr_array, int n) 
 {
     for (int i = 0; i < n; i++) 
@@ -21,11 +21,11 @@ int put_elements(double* ptr_array, int n)
     }
     return n;
 }
-// вставка -999 перед максимальным элементом
+// РІСЃС‚Р°РІРєР° -999 РїРµСЂРµРґ РјР°РєСЃРёРјР°Р»СЊРЅС‹Рј СЌР»РµРјРµРЅС‚РѕРј
 double* insert_before_max(double* ptr_array, int* n) 
 {
     if (*n == 0) return ptr_array;
-    // индекс максимального элемента
+    // РёРЅРґРµРєСЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
     int max_index = 0;
     for (int i = 1; i < *n; i++) 
     {
@@ -34,20 +34,20 @@ double* insert_before_max(double* ptr_array, int* n)
             max_index = i;
         }
     }
-    // увеличиваем на 1 элемент
+    // СѓРІРµР»РёС‡РёРІР°РµРј РЅР° 1 СЌР»РµРјРµРЅС‚
     double* new_array = (double*)malloc((*n + 1) * sizeof(double));
     if (new_array == NULL) 
     {
         printf("error\n");
         return ptr_array;
     }
-    // копируем элементы до максимального
+    // РєРѕРїРёСЂСѓРµРј СЌР»РµРјРµРЅС‚С‹ РґРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ
     for (int i = 0; i < max_index; i++) 
     {
         new_array[i] = ptr_array[i];
     }
     new_array[max_index] = -999.0;
-    // остальные элементы
+    // РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹
     for (int i = max_index; i < *n; i++) 
     {
         new_array[i + 1] = ptr_array[i];
@@ -62,7 +62,7 @@ void main()
     setlocale(LC_ALL, "RUS");
     double* ptr_array;
     int size;
-    printf("Введите размер массива: ");
+    printf("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ");
     scanf("%d", &size);
     ptr_array = (double*)malloc(size * sizeof(double));
     if (ptr_array == NULL) 
@@ -71,10 +71,10 @@ void main()
         return -1;
     }
     full_elements(ptr_array, size);
-    printf("\nИсходный массив:\n");
+    printf("\nРСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ:\n");
     put_elements(ptr_array, size);
     ptr_array = insert_before_max(ptr_array, &size);
-    printf("\nМассив после вставки -999 перед максимальным элементом:\n");
+    printf("\nРњР°СЃСЃРёРІ РїРѕСЃР»Рµ РІСЃС‚Р°РІРєРё -999 РїРµСЂРµРґ РјР°РєСЃРёРјР°Р»СЊРЅС‹Рј СЌР»РµРјРµРЅС‚РѕРј:\n");
     put_elements(ptr_array, size);
     free(ptr_array);
     system("pause");
