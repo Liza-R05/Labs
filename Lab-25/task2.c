@@ -4,20 +4,20 @@
 #include <time.h>
 #include <locale.h>
 
-// целое число от 1 до mmax
+// С†РµР»РѕРµ С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ mmax
 int rand10(int mmax)
 {
     return 1 + rand() % mmax;
 }
 
-// вещественное число в заданном диапазоне
+// РІРµС‰РµСЃС‚РІРµРЅРЅРѕРµ С‡РёСЃР»Рѕ РІ Р·Р°РґР°РЅРЅРѕРј РґРёР°РїР°Р·РѕРЅРµ
 double rand_double(double dmin, double dmax)
 {
     double scale = rand() / (double)RAND_MAX;
     return dmin + scale * (dmax - dmin);
 }
 
-// массив из n целых чисел от 1 до mmax
+// РјР°СЃСЃРёРІ РёР· n С†РµР»С‹С… С‡РёСЃРµР» РѕС‚ 1 РґРѕ mmax
 int* rand_array_int(int n, int mmax)
 {
     int* arr = (int*)malloc(n * sizeof(int));
@@ -28,7 +28,7 @@ int* rand_array_int(int n, int mmax)
     return arr;
 }
 
-// массив из n вещественных чисел в диапазоне от -dm до +dm
+// РјР°СЃСЃРёРІ РёР· n РІРµС‰РµСЃС‚РІРµРЅРЅС‹С… С‡РёСЃРµР» РІ РґРёР°РїР°Р·РѕРЅРµ РѕС‚ -dm РґРѕ +dm
 double* rand_array_double(int n, double dm)
 {
     double* arr = (double*)malloc(n * sizeof(double));
@@ -42,15 +42,15 @@ double* rand_array_double(int n, double dm)
 void main()
 {
     setlocale(LC_ALL, "RUS");
-    srand(time(NULL)); // рандомизация
+    srand(time(NULL)); // СЂР°РЅРґРѕРјРёР·Р°С†РёСЏ
 
-    // сравнение последовательностей
-    printf("Первые 5 чисел: ");
+    // СЃСЂР°РІРЅРµРЅРёРµ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚РµР№
+    printf("РџРµСЂРІС‹Рµ 5 С‡РёСЃРµР»: ");
     for (int i = 0; i < 5; i++) 
     {
         printf("%d ", rand10(10));
     }
-    printf("\nСледующие 5 чисел: ");
+    printf("\nРЎР»РµРґСѓСЋС‰РёРµ 5 С‡РёСЃРµР»: ");
     for (int i = 0; i < 5; i++) 
     {
         printf("%d ", rand10(10));
@@ -58,7 +58,7 @@ void main()
     printf("\n\n");
 
     // 2
-    printf("Целые числа от 1 до 10:\n");
+    printf("Р¦РµР»С‹Рµ С‡РёСЃР»Р° РѕС‚ 1 РґРѕ 10:\n");
     for (int i = 0; i < 5; i++)
     {
         printf("%d ", rand10(10));
@@ -66,7 +66,7 @@ void main()
     printf("\n\n");
 
     // 3
-    printf("Вещественные числа от 0.0 до 1.0:\n");
+    printf("Р’РµС‰РµСЃС‚РІРµРЅРЅС‹Рµ С‡РёСЃР»Р° РѕС‚ 0.0 РґРѕ 1.0:\n");
     for (int i = 0; i < 5; i++)
     {
         printf("%.2f ", rand_double(0.0, 1.0));
@@ -74,7 +74,7 @@ void main()
     printf("\n\n");
 
     // 4
-    printf("Массив из 8 целых чисел от 1 до 100:\n");
+    printf("РњР°СЃСЃРёРІ РёР· 8 С†РµР»С‹С… С‡РёСЃРµР» РѕС‚ 1 РґРѕ 100:\n");
     int* int_arr = rand_array_int(8, 100);
     for (int i = 0; i < 8; i++) 
     {
@@ -83,7 +83,7 @@ void main()
     printf("\n\n");
 
     // 5
-    printf("Массив из 6 вещественных чисел от -5.0 до +5.0:\n");
+    printf("РњР°СЃСЃРёРІ РёР· 6 РІРµС‰РµСЃС‚РІРµРЅРЅС‹С… С‡РёСЃРµР» РѕС‚ -5.0 РґРѕ +5.0:\n");
     double* double_arr = rand_array_double(6, 5.0);
     for (int i = 0; i < 6; i++) 
     {
