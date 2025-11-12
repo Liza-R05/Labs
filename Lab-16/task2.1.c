@@ -4,7 +4,7 @@
 #include <locale.h>
 #include <time.h>
 
-// заполнение массива случайными числами от -1 до 1
+// Р·Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё РѕС‚ -1 РґРѕ 1
 double* full_elements(double* ptr_array, int n) 
 {
     for (int i = 0; i < n; i++) 
@@ -13,7 +13,7 @@ double* full_elements(double* ptr_array, int n)
     }
     return ptr_array;
 }
-// печать элементов массива
+// РїРµС‡Р°С‚СЊ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°
 int put_elements(double* ptr_array, int n) 
 {
     for (int i = 0; i < n; i++) 
@@ -22,11 +22,11 @@ int put_elements(double* ptr_array, int n)
     }
     return n;
 }
-// удаление двух максимальных элементов
+// СѓРґР°Р»РµРЅРёРµ РґРІСѓС… РјР°РєСЃРёРјР°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 double* remove_two_max(double* ptr_array, int* n) 
 {
     if (*n < 2) return ptr_array;
-    // находим индексы двух максимальных элементов
+    // РЅР°С…РѕРґРёРј РёРЅРґРµРєСЃС‹ РґРІСѓС… РјР°РєСЃРёРјР°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
     int max1_index = 0, max2_index = 1;
     if (ptr_array[1] > ptr_array[0]) 
     {
@@ -45,20 +45,20 @@ double* remove_two_max(double* ptr_array, int* n)
             max2_index = i;
         }
     }
-    // удаляем элементы
+    // СѓРґР°Р»СЏРµРј СЌР»РµРјРµРЅС‚С‹
     if (max1_index < max2_index) 
     {
         int temp = max1_index;
         max1_index = max2_index;
         max2_index = temp;
     }
-    // с большим индексом
+    // СЃ Р±РѕР»СЊС€РёРј РёРЅРґРµРєСЃРѕРј
     for (int i = max1_index; i < *n - 1; i++) 
     {
         ptr_array[i] = ptr_array[i + 1];
     }
     (*n)--;
-    // с меньшим индексом
+    // СЃ РјРµРЅСЊС€РёРј РёРЅРґРµРєСЃРѕРј
     for (int i = max2_index; i < *n - 1; i++) 
     {
         ptr_array[i] = ptr_array[i + 1];
@@ -73,7 +73,7 @@ void main()
     srand(time(NULL));
     double* ptr_array;
     int size;
-    printf("Введите размер массива: ");
+    printf("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ");
     scanf("%d", &size);
     ptr_array = (double*)malloc(size * sizeof(double));
     if (ptr_array == NULL) 
@@ -82,10 +82,10 @@ void main()
         return -1;
     }
     full_elements(ptr_array, size);
-    printf("\nИсходный массив:\n");
+    printf("\nРСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ:\n");
     put_elements(ptr_array, size);
     remove_two_max(ptr_array, &size);
-    printf("\nМассив после удаления двух максимальных элементов:\n");
+    printf("\nРњР°СЃСЃРёРІ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ РґРІСѓС… РјР°РєСЃРёРјР°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ:\n");
     put_elements(ptr_array, size);
     free(ptr_array);
     system("pause");
