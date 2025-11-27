@@ -4,17 +4,17 @@
 #include <locale.h>
 #include <time.h>
 
-// Функция формирования массива
+// Р¤СѓРЅРєС†РёСЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РјР°СЃСЃРёРІР°
 int* full_array(int* ptrarr, int n)
 {
     for (int i = 0; i < n; i++)
     {
-        ptrarr[i] = rand() % 100; // числа от 0 до 99
+        ptrarr[i] = rand() % 100; // С‡РёСЃР»Р° РѕС‚ 0 РґРѕ 99
     }
     return ptrarr;
 }
 
-// Функция вывода массива
+// Р¤СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РјР°СЃСЃРёРІР°
 int put_array(int* ptrarr, int n)
 {
     for (int i = 0; i < n; i++)
@@ -25,7 +25,7 @@ int put_array(int* ptrarr, int n)
     return 0;
 }
 
-// а) Пузырьковая сортировка
+// Р°) РџСѓР·С‹СЂСЊРєРѕРІР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
 void sort_bubble(int* ptrarr, int n)
 {
     int i, j, temp;
@@ -43,7 +43,7 @@ void sort_bubble(int* ptrarr, int n)
     }
 }
 
-// б) Шейкерная сортировка
+// Р±) РЁРµР№РєРµСЂРЅР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
 void sort_kokteil(int* ptrarr, int n)
 {
     int Left = 0;
@@ -52,7 +52,7 @@ void sort_kokteil(int* ptrarr, int n)
 
     while (Left <= Right)
     {
-        // Слева направо
+        // РЎР»РµРІР° РЅР°РїСЂР°РІРѕ
         for (j = Left; j < Right; j++)
         {
             if (ptrarr[j] > ptrarr[j + 1])
@@ -64,7 +64,7 @@ void sort_kokteil(int* ptrarr, int n)
         }
         Right--;
 
-        // Справа налево
+        // РЎРїСЂР°РІР° РЅР°Р»РµРІРѕ
         for (j = Right; j > Left; j--)
         {
             if (ptrarr[j] < ptrarr[j - 1])
@@ -78,7 +78,7 @@ void sort_kokteil(int* ptrarr, int n)
     }
 }
 
-// в) Сортировка простым выбором
+// РІ) РЎРѕСЂС‚РёСЂРѕРІРєР° РїСЂРѕСЃС‚С‹Рј РІС‹Р±РѕСЂРѕРј
 void sort_select(int* ptrarr, int n)
 {
     int i, j, imin, temp;
@@ -101,7 +101,7 @@ void sort_select(int* ptrarr, int n)
     }
 }
 
-// г) Сортировка вставками
+// Рі) РЎРѕСЂС‚РёСЂРѕРІРєР° РІСЃС‚Р°РІРєР°РјРё
 void sort_insert(int* ptrarr, int n)
 {
     int i, j, temp;
@@ -123,54 +123,54 @@ void main()
     setlocale(LC_ALL, "RUS");
 
     int size;
-    printf("Введите размер массива: ");
+    printf("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ");
     scanf("%d", &size);
 
-    // Выделение памяти для массива
+    // Р’С‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё РґР»СЏ РјР°СЃСЃРёРІР°
     int* ptrarr = (int*)malloc(size * sizeof(int));
 
-    // Формирование массива
+    // Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°СЃСЃРёРІР°
     full_array(ptrarr, size);
 
-    printf("Исходный массив: ");
+    printf("РСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ: ");
     put_array(ptrarr, size);
 
-    // Замер времени для сортировки вставками
+    // Р—Р°РјРµСЂ РІСЂРµРјРµРЅРё РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РІСЃС‚Р°РІРєР°РјРё
     clock_t t = clock();
     sort_insert(ptrarr, size);
     double time = (clock() - t) * 1. / CLOCKS_PER_SEC;
 
-    printf("Отсортированный массив: ");
+    printf("РћС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹Р№ РјР°СЃСЃРёРІ: ");
     put_array(ptrarr, size);
-    printf("Время сортировки вставками: %.6f секунд\n", time);
+    printf("Р’СЂРµРјСЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РІСЃС‚Р°РІРєР°РјРё: %.6f СЃРµРєСѓРЅРґ\n", time);
 
-    // Замер времени для других сортировок
+    // Р—Р°РјРµСЂ РІСЂРµРјРµРЅРё РґР»СЏ РґСЂСѓРіРёС… СЃРѕСЂС‚РёСЂРѕРІРѕРє
     int* arr2 = (int*)malloc(size * sizeof(int));
     int* arr3 = (int*)malloc(size * sizeof(int));
     int* arr4 = (int*)malloc(size * sizeof(int));
 
-    // Пузырьковая сортировка
+    // РџСѓР·С‹СЂСЊРєРѕРІР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
     full_array(arr2, size);
     t = clock();
     sort_bubble(arr2, size);
     time = (clock() - t) * 1. / CLOCKS_PER_SEC;
-    printf("Время пузырьковой сортировки: %.6f секунд\n", time);
+    printf("Р’СЂРµРјСЏ РїСѓР·С‹СЂСЊРєРѕРІРѕР№ СЃРѕСЂС‚РёСЂРѕРІРєРё: %.6f СЃРµРєСѓРЅРґ\n", time);
 
-    // Шейкерная сортировка
+    // РЁРµР№РєРµСЂРЅР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
     full_array(arr3, size);
     t = clock();
     sort_kokteil(arr3, size);
     time = (clock() - t) * 1. / CLOCKS_PER_SEC;
-    printf("Время шейкерной сортировки: %.6f секунд\n", time);
+    printf("Р’СЂРµРјСЏ С€РµР№РєРµСЂРЅРѕР№ СЃРѕСЂС‚РёСЂРѕРІРєРё: %.6f СЃРµРєСѓРЅРґ\n", time);
 
-    // Сортировка выбором
+    // РЎРѕСЂС‚РёСЂРѕРІРєР° РІС‹Р±РѕСЂРѕРј
     full_array(arr4, size);
     t = clock();
     sort_select(arr4, size);
     time = (clock() - t) * 1. / CLOCKS_PER_SEC;
-    printf("Время сортировки выбором: %.6f секунд\n", time);
+    printf("Р’СЂРµРјСЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РІС‹Р±РѕСЂРѕРј: %.6f СЃРµРєСѓРЅРґ\n", time);
 
-    // Освобождение памяти
+    // РћСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё
     free(ptrarr);
     free(arr2);
     free(arr3);
