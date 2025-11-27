@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <locale.h>
 
-// а) Пузырьковая сортировка
+// Р°) РџСѓР·С‹СЂСЊРєРѕРІР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
 void sort_bubble(int* ptrarr, int n) 
 {
     int i, j, temp;
@@ -21,7 +21,7 @@ void sort_bubble(int* ptrarr, int n)
     }
 }
 
-// б) Шейкерная сортировка
+// Р±) РЁРµР№РєРµСЂРЅР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
 void sort_kokteil(int* ptrarr, int n) 
 {
     int Left = 0;
@@ -30,7 +30,7 @@ void sort_kokteil(int* ptrarr, int n)
 
     while (Left <= Right) 
     {
-        // Слева направо
+        // РЎР»РµРІР° РЅР°РїСЂР°РІРѕ
         for (j = Left; j < Right; j++) 
         {
             if (ptrarr[j] > ptrarr[j + 1]) 
@@ -42,7 +42,7 @@ void sort_kokteil(int* ptrarr, int n)
         }
         Right--;
 
-        // Справа налево
+        // РЎРїСЂР°РІР° РЅР°Р»РµРІРѕ
         for (j = Right; j > Left; j--)
         {
             if (ptrarr[j] < ptrarr[j - 1]) 
@@ -56,7 +56,7 @@ void sort_kokteil(int* ptrarr, int n)
     }
 }
 
-// в) Сортировка простым выбором
+// РІ) РЎРѕСЂС‚РёСЂРѕРІРєР° РїСЂРѕСЃС‚С‹Рј РІС‹Р±РѕСЂРѕРј
 void sort_select(int* ptrarr, int n) 
 {
     int i, j, imin, temp;
@@ -79,7 +79,7 @@ void sort_select(int* ptrarr, int n)
     }
 }
 
-// г) Сортировка вставками
+// Рі) РЎРѕСЂС‚РёСЂРѕРІРєР° РІСЃС‚Р°РІРєР°РјРё
 void sort_insert(int* ptrarr, int n) 
 {
     int i, j, temp;
@@ -96,7 +96,7 @@ void sort_insert(int* ptrarr, int n)
     }
 }
 
-// Функция для вывода массива
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РІС‹РІРѕРґР° РјР°СЃСЃРёРІР°
 void print_array(int arr[], int n) 
 {
     for (int i = 0; i < n; i++) 
@@ -111,37 +111,37 @@ void main()
     setlocale(LC_ALL, "RUS");
     int n = 10;
     int arr1[10], arr2[10], arr3[10], arr4[10];
-    // Заполнение массивов случайными числами от 0 до 10
+    // Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІРѕРІ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё РѕС‚ 0 РґРѕ 10
     for (int i = 0; i < n; i++) 
     {
-        int num = rand() % 11; // числа от 0 до 10
+        int num = rand() % 11; // С‡РёСЃР»Р° РѕС‚ 0 РґРѕ 10
         arr1[i] = num;
         arr2[i] = num;
         arr3[i] = num;
         arr4[i] = num;
     }
-    printf("Исходный массив: ");
+    printf("РСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ: ");
     print_array(arr1, n);
     printf("\n");
 
-    // Проверка пузырьковой сортировки
+    // РџСЂРѕРІРµСЂРєР° РїСѓР·С‹СЂСЊРєРѕРІРѕР№ СЃРѕСЂС‚РёСЂРѕРІРєРё
     sort_bubble(arr1, n);
-    printf("Пузырьковая: ");
+    printf("РџСѓР·С‹СЂСЊРєРѕРІР°СЏ: ");
     print_array(arr1, n);
 
-    // Проверка шейкерной сортировки
+    // РџСЂРѕРІРµСЂРєР° С€РµР№РєРµСЂРЅРѕР№ СЃРѕСЂС‚РёСЂРѕРІРєРё
     sort_kokteil(arr2, n);
-    printf("Шейкерная:   ");
+    printf("РЁРµР№РєРµСЂРЅР°СЏ:   ");
     print_array(arr2, n);
 
-    // Проверка сортировки выбором
+    // РџСЂРѕРІРµСЂРєР° СЃРѕСЂС‚РёСЂРѕРІРєРё РІС‹Р±РѕСЂРѕРј
     sort_select(arr3, n);
-    printf("Выбором:     ");
+    printf("Р’С‹Р±РѕСЂРѕРј:     ");
     print_array(arr3, n);
 
-    // Проверка сортировки вставками
+    // РџСЂРѕРІРµСЂРєР° СЃРѕСЂС‚РёСЂРѕРІРєРё РІСЃС‚Р°РІРєР°РјРё
     sort_insert(arr4, n);
-    printf("Вставками:   ");
+    printf("Р’СЃС‚Р°РІРєР°РјРё:   ");
     print_array(arr4, n);
 
     system("pause");
