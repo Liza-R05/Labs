@@ -10,15 +10,16 @@ int main() {
     char tim[100];
     char date[100];
     char N[81];
-    // îòñòóïû äëÿ öåíòğèğîâàíèÿ
-    struct tm* mytime; // óêàçàòåëü íà ñòğóêòóğó tm
+
+    struct tm* mytime; // ÑƒĞºĞ°Ğ·Ğ°Ñ‚ĞµĞ»ÑŒ Ğ½Ğ° ÑÑ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ñƒ tm
     time_t t;
     t = time(NULL);
-    // òğàíñôîğìàöèÿ åãî â ñòğóêòóğó tm
+    // Ñ‚Ñ€Ğ°Ğ½ÑÑ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ğ¸Ñ ĞµĞ³Ğ¾ Ğ² ÑÑ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ñƒ tm
     mytime = localtime(&t);
-
-    sprintf(tim, "Òåêóùåå âğåìÿ: %02d:%02d:%02d", mytime->tm_hour, mytime->tm_min, mytime->tm_sec);
-    sprintf(date, "Ñåãîäíÿ %d-é äåíü %d ãîäà", mytime->tm_yday + 1, mytime->tm_year + 1900);
+    
+    // Ğ¾Ñ‚ÑÑ‚ÑƒĞ¿Ñ‹ Ğ´Ğ»Ñ Ñ†ĞµĞ½Ñ‚Ñ€Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ¸Ñ
+    sprintf(tim, "Ğ¢ĞµĞºÑƒÑ‰ĞµĞµ Ğ²Ñ€ĞµĞ¼Ñ: %02d:%02d:%02d", mytime->tm_hour, mytime->tm_min, mytime->tm_sec);
+    sprintf(date, "Ğ¡ĞµĞ³Ğ¾Ğ´Ğ½Ñ %d-Ğ¹ Ğ´ĞµĞ½ÑŒ %d Ğ³Ğ¾Ğ´Ğ°", mytime->tm_yday + 1, mytime->tm_year + 1900);
 
     int time_padding = (80 - strlen(tim)) / 2;
     int date_padding = (80 - strlen(date)) / 2;
