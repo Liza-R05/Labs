@@ -4,7 +4,7 @@
 #include <locale.h>
 #include <math.h>
 
-// Определение структуры для точки
+// РћРїСЂРµРґРµР»РµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РґР»СЏ С‚РѕС‡РєРё
 struct point 
 {
     float x;
@@ -12,7 +12,7 @@ struct point
     char name;
 };
 
-// Объявление типа Point для структуры
+// РћР±СЉСЏРІР»РµРЅРёРµ С‚РёРїР° Point РґР»СЏ СЃС‚СЂСѓРєС‚СѓСЂС‹
 typedef struct point Point;
 
 void put_point(Point z) 
@@ -22,15 +22,15 @@ void put_point(Point z)
 
 void input_point(Point* p) 
 {
-    printf("Введите имя точки: ");
+    printf("Р’РІРµРґРёС‚Рµ РёРјСЏ С‚РѕС‡РєРё: ");
     scanf(" %c", &p->name);
-    printf("Введите координату x: ");
+    printf("Р’РІРµРґРёС‚Рµ РєРѕРѕСЂРґРёРЅР°С‚Сѓ x: ");
     scanf("%f", &p->x);
-    printf("Введите координату y: ");
+    printf("Р’РІРµРґРёС‚Рµ РєРѕРѕСЂРґРёРЅР°С‚Сѓ y: ");
     scanf("%f", &p->y);
 }
 
-// вычисления декартова расстояния между двумя точками
+// РІС‹С‡РёСЃР»РµРЅРёСЏ РґРµРєР°СЂС‚РѕРІР° СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РјРµР¶РґСѓ РґРІСѓРјСЏ С‚РѕС‡РєР°РјРё
 float dist(Point z, Point w) 
 {
     float dx = w.x - z.x;
@@ -43,7 +43,7 @@ Point midpoint(Point a, Point b)
     Point mid;
     mid.x = (a.x + b.x) / 2;
     mid.y = (a.y + b.y) / 2;
-    mid.name = 'M'; // M - середина
+    mid.name = 'M'; // M - СЃРµСЂРµРґРёРЅР°
     return mid;
 }
 
@@ -52,22 +52,22 @@ void main()
     setlocale(LC_ALL, "RUS");
     Point a, b, middle;
 
-    printf("Ввод точки A: \n");
+    printf("Р’РІРѕРґ С‚РѕС‡РєРё A: \n");
     input_point(&a);
-    printf("\nВвод точки B: \n");
+    printf("\nР’РІРѕРґ С‚РѕС‡РєРё B: \n");
     input_point(&b);
 
-    printf("\nВведенные точки:\n");
+    printf("\nР’РІРµРґРµРЅРЅС‹Рµ С‚РѕС‡РєРё:\n");
     put_point(a);
     printf("\n");
     put_point(b);
     printf("\n");
 
-    printf("\nРасстояние между точками: ");
+    printf("\nР Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ С‚РѕС‡РєР°РјРё: ");
     float distance = dist(a, b);
     printf(" = %.2f\n", distance);
 
-    printf("\nСередина отрезка:\n");
+    printf("\nРЎРµСЂРµРґРёРЅР° РѕС‚СЂРµР·РєР°:\n");
     middle = midpoint(a, b);
     put_point(middle);
     printf("\n");
