@@ -4,14 +4,14 @@
 #include <locale.h>
 #include <string.h>
 
-// для хранения времени
+// РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РІСЂРµРјРµРЅРё
 struct Time
 {
     int hours;
     int minutes;
 };
 
-// для авиарейса
+// РґР»СЏ Р°РІРёР°СЂРµР№СЃР°
 struct Flight
 {
     int number;
@@ -22,13 +22,13 @@ struct Flight
     int distance;
 };
 
-// для вычисления длительности полета в минутах
+// РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РґР»РёС‚РµР»СЊРЅРѕСЃС‚Рё РїРѕР»РµС‚Р° РІ РјРёРЅСѓС‚Р°С…
 int flight_duration(struct Time dep, struct Time arr)
 {
     int dep_minutes = dep.hours * 60 + dep.minutes;
     int arr_minutes = arr.hours * 60 + arr.minutes;
 
-    // случай, когда прилет на следующий день
+    // СЃР»СѓС‡Р°Р№, РєРѕРіРґР° РїСЂРёР»РµС‚ РЅР° СЃР»РµРґСѓСЋС‰РёР№ РґРµРЅСЊ
     if (arr_minutes < dep_minutes)
     {
         arr_minutes += 24 * 60;
@@ -37,59 +37,59 @@ int flight_duration(struct Time dep, struct Time arr)
     return arr_minutes - dep_minutes;
 }
 
-// для ввода времени
+// РґР»СЏ РІРІРѕРґР° РІСЂРµРјРµРЅРё
 void input_time(struct Time* t, const char* prompt)
 {
-    printf("%s (часы минуты): ", prompt);
+    printf("%s (С‡Р°СЃС‹ РјРёРЅСѓС‚С‹): ", prompt);
     scanf("%d %d", &t->hours, &t->minutes);
 }
 
 void input_flight(struct Flight* f)
 {
-    printf("\n--Ввод данных о рейсе--\n");
-    printf("Номер рейса: ");
+    printf("\n--Р’РІРѕРґ РґР°РЅРЅС‹С… Рѕ СЂРµР№СЃРµ--\n");
+    printf("РќРѕРјРµСЂ СЂРµР№СЃР°: ");
     scanf("%d", &f->number);
 
-    input_time(&f->departure, "Время вылета");
-    input_time(&f->arrival, "Время прилета");
+    input_time(&f->departure, "Р’СЂРµРјСЏ РІС‹Р»РµС‚Р°");
+    input_time(&f->arrival, "Р’СЂРµРјСЏ РїСЂРёР»РµС‚Р°");
 
-    printf("Направление: ");
+    printf("РќР°РїСЂР°РІР»РµРЅРёРµ: ");
     scanf("%s", f->direction);
 
-    printf("Марка самолета: ");
+    printf("РњР°СЂРєР° СЃР°РјРѕР»РµС‚Р°: ");
     scanf("%s", f->aircraft);
 
-    printf("Расстояние (км): ");
+    printf("Р Р°СЃСЃС‚РѕСЏРЅРёРµ (РєРј): ");
     scanf("%d", &f->distance);
 }
 
-// для вывода данных о рейсе
+// РґР»СЏ РІС‹РІРѕРґР° РґР°РЅРЅС‹С… Рѕ СЂРµР№СЃРµ
 void print_flight(struct Flight f)
 {
-    printf("Рейс %d: %s - %s\n", f.number, f.direction, f.aircraft);
-    printf("  Вылет: %02d:%02d, Прилет: %02d:%02d\n",
+    printf("Р РµР№СЃ %d: %s - %s\n", f.number, f.direction, f.aircraft);
+    printf("  Р’С‹Р»РµС‚: %02d:%02d, РџСЂРёР»РµС‚: %02d:%02d\n",
         f.departure.hours, f.departure.minutes,
         f.arrival.hours, f.arrival.minutes);
-    printf("  Расстояние: %d км\n", f.distance);
-    printf("  Длительность: %d ч %d мин\n",
+    printf("  Р Р°СЃСЃС‚РѕСЏРЅРёРµ: %d РєРј\n", f.distance);
+    printf("  Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ: %d С‡ %d РјРёРЅ\n",
         flight_duration(f.departure, f.arrival) / 60,
         flight_duration(f.departure, f.arrival) % 60);
 }
 
-// Функция записи массива структур в файл
+// Р¤СѓРЅРєС†РёСЏ Р·Р°РїРёСЃРё РјР°СЃСЃРёРІР° СЃС‚СЂСѓРєС‚СѓСЂ РІ С„Р°Р№Р»
 int writefile(char* filename, struct Flight* flights, int size)
 {
     FILE* out;
     if ((out = fopen(filename, "wt")) == NULL)
     {
-        printf("Ошибка открытия файла для записи\n");
+        printf("РћС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё\n");
         return 0;
     }
 
     for (int i = 0; i < size; i++)
     {
         {
-            fprintf(out, "Номер рейса: %d ; Вылет: %d %d ; Прилет: %d %d ; Направление: %s ; Марка самолета: %s ; Расстояние (км): %d\n", flights[i].number, flights[i].departure.hours, 
+            fprintf(out, "РќРѕРјРµСЂ СЂРµР№СЃР°: %d ; Р’С‹Р»РµС‚: %d %d ; РџСЂРёР»РµС‚: %d %d ; РќР°РїСЂР°РІР»РµРЅРёРµ: %s ; РњР°СЂРєР° СЃР°РјРѕР»РµС‚Р°: %s ; Р Р°СЃСЃС‚РѕСЏРЅРёРµ (РєРј): %d\n", flights[i].number, flights[i].departure.hours, 
                 flights[i].departure.minutes, flights[i].arrival.hours, flights[i].arrival.minutes, flights[i].direction, flights[i].aircraft, flights[i].distance);
         }
     }
@@ -106,14 +106,14 @@ int main()
     int max_duration = 0;
     int max_index = 0;
 
-    printf("Введите данные о 3 авиарейсах:\n");
+    printf("Р’РІРµРґРёС‚Рµ РґР°РЅРЅС‹Рµ Рѕ 3 Р°РІРёР°СЂРµР№СЃР°С…:\n");
     for (int i = 0; i < 3; i++)
     {
-        printf("\n=== Рейс %d ===\n", i + 1);
+        printf("\n=== Р РµР№СЃ %d ===\n", i + 1);
         input_flight(&flights[i]);
     }
 
-    // поиск рейса с максимальной длительностью
+    // РїРѕРёСЃРє СЂРµР№СЃР° СЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ РґР»РёС‚РµР»СЊРЅРѕСЃС‚СЊСЋ
     for (int i = 0; i < 3; i++)
     {
         int duration = flight_duration(flights[i].departure, flights[i].arrival);
@@ -124,11 +124,11 @@ int main()
         }
     }
 
-    // в консоль
-    printf("\n--Рейс с МАКС длительностью--\n");
+    // РІ РєРѕРЅСЃРѕР»СЊ
+    printf("\n--Р РµР№СЃ СЃ РњРђРљРЎ РґР»РёС‚РµР»СЊРЅРѕСЃС‚СЊСЋ--\n");
     print_flight(flights[max_index]);
 
-    // в файл
+    // РІ С„Р°Р№Р»
     writefile("flights.txt", flights, 3);
 
     printf("\n");
