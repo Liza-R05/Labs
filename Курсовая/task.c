@@ -5,7 +5,7 @@
 #include <locale.h>
 #include <time.h>
 
-void input_matrix(double** A, int n, int m)
+double** input_matrix(double** A, int n, int m)
 {
     // ввод элементов матрицы с консоли
     printf("Введите элементы матрицы %dx%d:\n", n, m);
@@ -17,9 +17,10 @@ void input_matrix(double** A, int n, int m)
             scanf("%lf", &A[i][j]);
         }
     }
+    return A;
 }
 
-void random_matrix(double** A, int n, int m)
+double** random_matrix(double** A, int n, int m)
 {
     // заполнение случайными числами
     for (int i = 0; i < n; i++)
@@ -30,6 +31,7 @@ void random_matrix(double** A, int n, int m)
         }
     }
     printf("Массив заполнен случайными числами от -10.00 до 10.00\n");
+    return A;
 }
 
 void print_matrix(double** A, int n, int m)
@@ -44,32 +46,35 @@ void print_matrix(double** A, int n, int m)
     }
 }
 
-double* find_max_module(double** A, int n, int m)
+void find_max_module(double** A, int n, int m, int* max_i, int* max_j)
 {
-    double* max_ptr = &A[0][0];
+    double max_sq = A[0][0] * A[0][0];
+    *max_i = 0;
+    *max_j = 0;
+
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            double c_s = A[i][j] * A[i][j];
-            double max_s = (*max_ptr) * (*max_ptr);
-            if (c_s > max_s)
+            double c_sq = A[i][j] * A[i][j];
+            if (c_sq > max_sq)
             {
-                max_ptr = &A[i][j];
+                max_sq = c_sq;
+                *max_i = i;
+                *max_j = j;
             }
         }
     }
-    return max_ptr;
 }
 
-void swap_r(double** A, int row1, int row2)
+void swap_r(double** A, int row1, int row2) // ???
 {
     double* temp = A[row1];
     A[row1] = A[row2];
     A[row2] = temp;
 }
 
-void swap_c(double** A, int n, int col1, int col2)
+void swap_c(double** A, int n, int col1, int col2) // ???
 {
     for (int i = 0; i < n; i++)
     {
@@ -83,6 +88,13 @@ int input_k(int n, int m)
 {
     int k;
     int valid_k = 0;
+    int max_k;
+
+    if (n < m)
+        max_k = n - 1;
+    else
+        max_k = m - 1;
+
     while (!valid_k)
     {
         printf("Введите k: ");
@@ -90,7 +102,7 @@ int input_k(int n, int m)
 
         if (k < 0 || k >= n || k >= m)
         {
-            printf("Ошибка! k должно быть от 0 до %d\n", (n < m) ? n - 1 : m - 1);
+            printf("Ошибка! k должно быть от 0 до %d\n", max_k);
         }
         else
         {
@@ -98,25 +110,6 @@ int input_k(int n, int m)
         }
     }
     return k;
-}
-
-void free_matrix(double** A, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        free(A[i]);
-    }
-    free(A);
-}
-
-double** allocate_matrix(int n, int m)
-{
-    double** A = (double**)malloc(n * sizeof(double*));
-    for (int i = 0; i < n; i++)
-    {
-        A[i] = (double*)malloc(m * sizeof(double));
-    }
-    return A;
 }
 
 int main()
@@ -150,7 +143,7 @@ int main()
         int n, m, k;
         int c1 = 0, vc1 = 0;
         int c2 = 0, vc2 = 0;
-        int choice;
+        int choice; int imax, jmax;
 
         // ввод размеров матрицы
         printf("Введите количество строк n: ");
@@ -159,7 +152,16 @@ int main()
         scanf("%d", &m);
 
         // создаем матрицу как массив указателей
-        double** A = allocate_matrix(n, m);
+        double** A = (double**)malloc(n * sizeof(double*));
+        if (A == NULL)
+        {
+            printf("error\n");
+            return -1;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            A[i] = (double*)malloc(m * sizeof(double));
+        }
 
         while (!vc1)
         {
@@ -203,10 +205,10 @@ int main()
             {
                 printf("\nИсходная матрица:\n");
                 print_matrix(A, n, m);
-                double* max_ptr = find_max_module(A, n, m);
+                find_max_module(A, n, m, &imax, &jmax);
+                double max_val = A[imax][jmax];
                 k = input_k(n, m);
-                int imax = (max_ptr - &A[0][0]) / m;
-                int jmax = (max_ptr - &A[0][0]) % m;
+
 
                 // меняем строки местами  
                 if (imax != k)
@@ -241,11 +243,11 @@ int main()
                 printf("\nИсходная матрица:\n");
                 print_matrix(A, n, m);
                 printf("\nВЫПОЛНЕННЫЕ ДЕЙСТВИЯ:\n");
-                double* max_ptr = find_max_module(A, n, m);
-                int imax = (max_ptr - &A[0][0]) / m;
-                int jmax = (max_ptr - &A[0][0]) % m;
 
-                printf("\nМаксимальный элемент: %.2f в позиции [%d][%d]\n", *max_ptr, imax, jmax);
+                find_max_module(A, n, m, &imax, &jmax);
+                double max_val = A[imax][jmax];
+
+                printf("\nМаксимальный элемент: %.2f в позиции [%d][%d]\n", max_val, imax, jmax);
                 k = input_k(n, m);
 
                 // меняем строки местами
@@ -285,7 +287,11 @@ int main()
             }
         }
         // освобождаем память
-        free_matrix(A, n);
+        for (int i = 0; i < n; i++)
+        {
+            free(A[i]);
+        }
+        free(A);
         // запрос на продолжение работы
         printf("\n=================================\n");
         printf("Хотите продолжить работу?\n");
