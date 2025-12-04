@@ -8,24 +8,24 @@ int main()
     setlocale(LC_ALL, "RUS");
 
     char fname[20] = "number.txt";
-    FILE* out; // указатель на файл
+    FILE* out; // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С„Р°Р№Р»
     float number;
 
-    puts("Создание файла number.txt");
+    puts("РЎРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р° number.txt");
 
-    printf("Введите цифру для записи в файл: ");
+    printf("Р’РІРµРґРёС‚Рµ С†РёС„СЂСѓ РґР»СЏ Р·Р°РїРёСЃРё РІ С„Р°Р№Р»: ");
     scanf("%f", &number);
 
-    // oткрытие файла для записи (write text)
+    // oС‚РєСЂС‹С‚РёРµ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё (write text)
     if ((out = fopen(fname, "at")) == NULL)
     {
-        printf("Ошибка открытия файла для записи\n");
+        printf("РћС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё\n");
         system("pause");
         return 0;
     }
 
     fprintf(out, "%.2f\n", number);
-    fclose(out); // закрыть файл
+    fclose(out); // Р·Р°РєСЂС‹С‚СЊ С„Р°Р№Р»
     system("pause");
     return 0;
 }
