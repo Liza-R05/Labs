@@ -16,19 +16,19 @@ int main()
     double number;
     int count = 0;
 
-    printf("Введите имя файла с числами: ");
+    printf("Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° СЃ С‡РёСЃР»Р°РјРё: ");
     scanf("%s", filename);
 
     input_file = fopen(filename, "rt");
     if (input_file == NULL)
     {
-        printf("Ошибка\n");
+        printf("РћС€РёР±РєР°\n");
         system("pause");
         return 1;
     }
 
-    // новое имя файла
-    // найдем точку для вставки "sq"
+    // РЅРѕРІРѕРµ РёРјСЏ С„Р°Р№Р»Р°
+    // РЅР°Р№РґРµРј С‚РѕС‡РєСѓ РґР»СЏ РІСЃС‚Р°РІРєРё "sq"
     char* dot = strrchr(filename, '.');
     if (dot != NULL)
     {
@@ -39,11 +39,11 @@ int main()
         sprintf(new_filename, "%ssq", filename);
     }
 
-    // новый файл для записи
+    // РЅРѕРІС‹Р№ С„Р°Р№Р» РґР»СЏ Р·Р°РїРёСЃРё
     output_file = fopen(new_filename, "wt");
     if (output_file == NULL)
     {
-        printf("Ошибка\n", new_filename);
+        printf("РћС€РёР±РєР°\n", new_filename);
         fclose(input_file);
         system("pause");
         return 1;
@@ -53,8 +53,8 @@ int main()
     {
         printf("%.2lf\n", number);
         number = number * number;
-        printf("Квадрат: %.2lf\n", number);
-        // результат в новый файл
+        printf("РљРІР°РґСЂР°С‚: %.2lf\n", number);
+        // СЂРµР·СѓР»СЊС‚Р°С‚ РІ РЅРѕРІС‹Р№ С„Р°Р№Р»
         fprintf(output_file, "%.6lf\n", number);
 
         count++;
