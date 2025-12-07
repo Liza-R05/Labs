@@ -8,32 +8,32 @@ int main()
     setlocale(LC_ALL, "RUS");
 
     FILE* in;
-    double value;  // чтение значений функции
+    double value;  // С‡С‚РµРЅРёРµ Р·РЅР°С‡РµРЅРёР№ С„СѓРЅРєС†РёРё
     double sum = 0.0;
     int count = 0;
-    char line[200]; // не содержат числа
+    char line[200]; // РЅРµ СЃРѕРґРµСЂР¶Р°С‚ С‡РёСЃР»Р°
 
-    // файл для чтения
+    // С„Р°Р№Р» РґР»СЏ С‡С‚РµРЅРёСЏ
     in = fopen("temp.txt", "rt");
     if (in == NULL)
     {
-        printf("Ошибка\n");
+        printf("РћС€РёР±РєР°\n");
         system("pause");
         return 1;
     }
 
     while (!feof(in))
     {
-        // прочитать число
+        // РїСЂРѕС‡РёС‚Р°С‚СЊ С‡РёСЃР»Рѕ
         if (fscanf(in, "%lf", &value) == 1)
         {
             sum += value;
             count++;
-            printf("Найдено: %.2lf\n", value);
+            printf("РќР°Р№РґРµРЅРѕ: %.2lf\n", value);
         }
         else
         {
-            // не число, пропускаем
+            // РЅРµ С‡РёСЃР»Рѕ, РїСЂРѕРїСѓСЃРєР°РµРј
             fgetc(in);
         }
     }
@@ -42,12 +42,12 @@ int main()
 
     if (count == 0)
     {
-        printf("Не найдено числовых данных\n");
+        printf("РќРµ РЅР°Р№РґРµРЅРѕ С‡РёСЃР»РѕРІС‹С… РґР°РЅРЅС‹С…\n");
     }
     else
     {
         double average = sum / count;
-        printf("Среднее арифметическое: %.2lf\n", average);
+        printf("РЎСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ: %.2lf\n", average);
     }
 
     printf("\n");
