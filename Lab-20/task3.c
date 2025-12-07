@@ -15,18 +15,18 @@ int main()
     input_file = fopen("winter.txt", "rt");
     if (input_file == NULL)
     {
-        printf("Ошибка\n");
+        printf("РћС€РёР±РєР°\n");
         system("pause");
         return 1;
     }
 
-    printf("Введите имя для нового файла: ");
+    printf("Р’РІРµРґРёС‚Рµ РёРјСЏ РґР»СЏ РЅРѕРІРѕРіРѕ С„Р°Р№Р»Р°: ");
     scanf("%s", output_filename);
 
     output_file = fopen(output_filename, "wt");
     if (output_file == NULL)
     {
-        printf("Ошибка\n");
+        printf("РћС€РёР±РєР°\n");
         fclose(input_file);
         system("pause");
         return 1;
@@ -34,15 +34,14 @@ int main()
 
     while (1)
     {
-        ch = fgetc(input_file);  // читаем один символ
-        if (ch == -1)  // если достигли конца файла
+        ch = fgetc(input_file);  // С‡РёС‚Р°РµРј СЃРёРјРІРѕР»
+        if (ch == -1)  // РєРѕРЅРµС† С„Р°Р№Р»Р°
         {
-            break;  // выходим из цикла
+            break;
         }
-
-        if (ch != ' ')  // если символ не пробел
+        if (ch != ' ')  // РµСЃР»Рё СЃРёРјРІРѕР» РЅРµ РїСЂРѕР±РµР»
         {
-            fputc(ch, output_file);  // записываем в новый файл
+            fputc(ch, output_file);
         }
     }
 
