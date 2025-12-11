@@ -9,15 +9,15 @@ double calculate(TFun prtf, double* x, int n)
 {
     if (n <= 0 || x == NULL || prtf == NULL) 
     {
-        printf("Îøèáêà\n");
+        printf("ÐžÑˆÐ¸Ð±ÐºÐ°\n");
         return 0.0;
     }
 
-    // min è max ïåðâûì âû÷èñëåííûì çíà÷åíèåì
+    // min Ð¸ max Ð¿ÐµÑ€Ð²Ñ‹Ð¼ Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ñ‹Ð¼ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸ÐµÐ¼
     double min_val = prtf(x[0]);
     double max_val = min_val;
 
-    // ïî âñåì ýëåìåíòàì ìàññèâà
+    // Ð¿Ð¾ Ð²ÑÐµÐ¼ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼ Ð¼Ð°ÑÑÐ¸Ð²Ð°
     for (int i = 1; i < n; i++) 
     {
         double current_val = prtf(x[i]);
@@ -46,7 +46,7 @@ int main()
     int n = 5;
 
     double result1 = calculate(fun1, x, n);
-    printf("Äëÿ fun1: min + max = %.6f\n", result1);
+    printf("Ð”Ð»Ñ fun1: min + max = %.6f\n", result1);
 
     system("pause");
     return 0;
