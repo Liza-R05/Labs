@@ -9,20 +9,20 @@
 
 typedef struct 
 {
-    int number;          // номер рейса
-    char direction[50];  // направление
-    char aircraft[30];   // марка самолета
-    int distance;        // расстояние (км)
+    int number;          // РЅРѕРјРµСЂ СЂРµР№СЃР°
+    char direction[50];  // РЅР°РїСЂР°РІР»РµРЅРёРµ
+    char aircraft[30];   // РјР°СЂРєР° СЃР°РјРѕР»РµС‚Р°
+    int distance;        // СЂР°СЃСЃС‚РѕСЏРЅРёРµ (РєРј)
     struct 
     {
         int hours;
         int minutes;
-    } departure;         // время вылета
+    } departure;         // РІСЂРµРјСЏ РІС‹Р»РµС‚Р°
     struct 
     {
         int hours;
         int minutes;
-    } arrival;           // время прилета
+    } arrival;           // РІСЂРµРјСЏ РїСЂРёР»РµС‚Р°
 } Flight;
 
 void displayMenu();
@@ -51,7 +51,7 @@ int main()
     do 
     {
         displayMenu();
-        printf("Выберите действие: ");
+        printf("Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ: ");
         scanf("%d", &choice);
 
         switch (choice) 
@@ -68,7 +68,7 @@ int main()
         case 4:
             if (count == 0) 
             {
-                printf("Нет данных\n");
+                printf("РќРµС‚ РґР°РЅРЅС‹С…\n");
             }
             else 
             {
@@ -81,7 +81,7 @@ int main()
         case 6:
             if (count == 0) 
             {
-                printf("Нет данных\n");
+                printf("РќРµС‚ РґР°РЅРЅС‹С…\n");
             }
             else 
             {
@@ -91,26 +91,26 @@ int main()
         case 7:
             if (count == 0) 
             {
-                printf("Нет данных\n");
+                printf("РќРµС‚ РґР°РЅРЅС‹С…\n");
             }
             else 
             {
                 Flight* found = searchFlight(flights, count);
                 if (found != NULL) 
                 {
-                    printf("\nНайден рейс:\n");
+                    printf("\nРќР°Р№РґРµРЅ СЂРµР№СЃ:\n");
                     printFlight(*found);
                 }
                 else 
                 {
-                    printf("Рейс не найден!\n");
+                    printf("Р РµР№СЃ РЅРµ РЅР°Р№РґРµРЅ!\n");
                 }
             }
             break;
         case 8:
             if (count == 0) 
             {
-                printf("Нет данных\n");
+                printf("РќРµС‚ РґР°РЅРЅС‹С…\n");
             }
             else 
             {
@@ -118,10 +118,10 @@ int main()
             }
             break;
         case 9:
-            printf("Выход из программы.\n");
+            printf("Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹.\n");
             break;
         default:
-            printf("Неверный выбор\n");
+            printf("РќРµРІРµСЂРЅС‹Р№ РІС‹Р±РѕСЂ\n");
         }
 
         printf("\n");
@@ -131,52 +131,52 @@ int main()
     return 0;
 }
 
-// Функция отображения меню
+// Р¤СѓРЅРєС†РёСЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РјРµРЅСЋ
 void displayMenu() 
 {
-    printf("\n--- МЕНЮ УПРАВЛЕНИЯ АВИАРЕЙСАМИ ---\n");
-    printf("1. Загрузить данные из файла\n");
-    printf("2. Сохранить данные в файл\n");
-    printf("3. Заполнить массив случайными данными\n");
-    printf("4. Показать все рейсы\n");
-    printf("5. Добавить новый рейс\n");
-    printf("6. Редактировать рейс\n");
-    printf("7. Поиск рейса\n");
-    printf("8. Сортировка рейсов\n");
-    printf("9. Выход\n");
+    printf("\n--- РњР•РќР® РЈРџР РђР’Р›Р•РќРРЇ РђР’РРђР Р•Р™РЎРђРњР ---\n");
+    printf("1. Р—Р°РіСЂСѓР·РёС‚СЊ РґР°РЅРЅС‹Рµ РёР· С„Р°Р№Р»Р°\n");
+    printf("2. РЎРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ РІ С„Р°Р№Р»\n");
+    printf("3. Р—Р°РїРѕР»РЅРёС‚СЊ РјР°СЃСЃРёРІ СЃР»СѓС‡Р°Р№РЅС‹РјРё РґР°РЅРЅС‹РјРё\n");
+    printf("4. РџРѕРєР°Р·Р°С‚СЊ РІСЃРµ СЂРµР№СЃС‹\n");
+    printf("5. Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ СЂРµР№СЃ\n");
+    printf("6. Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ СЂРµР№СЃ\n");
+    printf("7. РџРѕРёСЃРє СЂРµР№СЃР°\n");
+    printf("8. РЎРѕСЂС‚РёСЂРѕРІРєР° СЂРµР№СЃРѕРІ\n");
+    printf("9. Р’С‹С…РѕРґ\n");
     printf("--------------------------------------\n");
 }
 
-// генерации случайного числа
+// РіРµРЅРµСЂР°С†РёРё СЃР»СѓС‡Р°Р№РЅРѕРіРѕ С‡РёСЃР»Р°
 int getRandomNumber(int min, int max) 
 {
     return rand() % (max - min + 1) + min;
 }
 
-// заполнение случайными значениями
+// Р·Р°РїРѕР»РЅРµРЅРёРµ СЃР»СѓС‡Р°Р№РЅС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё
 void fillArray(Flight flights[], int* count)
 {
     int num;
-    printf("Сколько рейсов создать? ");
+    printf("РЎРєРѕР»СЊРєРѕ СЂРµР№СЃРѕРІ СЃРѕР·РґР°С‚СЊ? ");
     scanf("%d", &num);
     while (getchar() != '\n');
 
     if (num <= 0)
     {
-        printf("Неверное количество!\n");
+        printf("РќРµРІРµСЂРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ!\n");
         return;
     }
 
     if (num > MAX_FLIGHTS - *count)
     {
-        printf("Недостаточно места! Можно добавить только %d рейсов.\n", MAX_FLIGHTS - *count);
+        printf("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РјРµСЃС‚Р°! РњРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ С‚РѕР»СЊРєРѕ %d СЂРµР№СЃРѕРІ.\n", MAX_FLIGHTS - *count);
         return;
     }
 
     char* cities[] = { "Moscow", "SPb", "Sochi", "Kazan", "Ekaterinburg", "Novosibirsk", "Krasnodar" };
     char* aircrafts[] = { "Boeing-737", "Airbus-A320", "Boeing-777", "Airbus-A350", "Airbus-A100" };
 
-    printf("Создание %d рейсов...\n", num);
+    printf("РЎРѕР·РґР°РЅРёРµ %d СЂРµР№СЃРѕРІ...\n", num);
 
     for (int i = 0; i < num; i++)
     {
@@ -207,29 +207,29 @@ void fillArray(Flight flights[], int* count)
         flights[idx].arrival.hours = (flights[idx].departure.hours + flight_time) % 24;
         flights[idx].arrival.minutes = rand() % 60;
 
-        printf("  Создан рейс %d\n", flights[idx].number);
+        printf("  РЎРѕР·РґР°РЅ СЂРµР№СЃ %d\n", flights[idx].number);
     }
 
     *count += num;
-    printf("Готово! Создано %d рейсов. Всего: %d\n", num, *count);
+    printf("Р“РѕС‚РѕРІРѕ! РЎРѕР·РґР°РЅРѕ %d СЂРµР№СЃРѕРІ. Р’СЃРµРіРѕ: %d\n", num, *count);
 }
 
-// вывод 1 рейса
+// РІС‹РІРѕРґ 1 СЂРµР№СЃР°
 void printFlight(Flight flight) 
 {
-    printf("Рейс %d: %s\n", flight.number, flight.direction);
-    printf("  Самолет: %s\n", flight.aircraft);
-    printf("  Расстояние: %d км\n", flight.distance);
-    printf("  Вылет: %02d:%02d, Прилет: %02d:%02d\n",
+    printf("Р РµР№СЃ %d: %s\n", flight.number, flight.direction);
+    printf("  РЎР°РјРѕР»РµС‚: %s\n", flight.aircraft);
+    printf("  Р Р°СЃСЃС‚РѕСЏРЅРёРµ: %d РєРј\n", flight.distance);
+    printf("  Р’С‹Р»РµС‚: %02d:%02d, РџСЂРёР»РµС‚: %02d:%02d\n",
         flight.departure.hours, flight.departure.minutes,
         flight.arrival.hours, flight.arrival.minutes);
 }
 
-// всего массива
+// РІСЃРµРіРѕ РјР°СЃСЃРёРІР°
 void printArray(Flight flights[], int size) 
 {
-    printf("\n--- СПИСОК АВИАРЕЙСОВ ---\n");
-    printf("Всего рейсов: %d\n\n", size);
+    printf("\n--- РЎРџРРЎРћРљ РђР’РРђР Р•Р™РЎРћР’ ---\n");
+    printf("Р’СЃРµРіРѕ СЂРµР№СЃРѕРІ: %d\n\n", size);
 
     for (int i = 0; i < size; i++) 
     {
@@ -239,122 +239,122 @@ void printArray(Flight flights[], int size)
     }
 }
 
-// загрузка из файла
+// Р·Р°РіСЂСѓР·РєР° РёР· С„Р°Р№Р»Р°
 void loadFromFile(Flight flights[], int* count) 
 {
     FILE* file = fopen(FILENAME, "rb");
 
     if (file == NULL) 
     {
-        printf("Файл не найден\n");
+        printf("Р¤Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ\n");
         *count = 0;
         return;
     }
 
-    // количество рейсов
+    // РєРѕР»РёС‡РµСЃС‚РІРѕ СЂРµР№СЃРѕРІ
     fread(count, sizeof(int), 1, file);
 
     if (*count > MAX_FLIGHTS) 
     {
-        printf("Ошибка, много записей!\n");
+        printf("РћС€РёР±РєР°, РјРЅРѕРіРѕ Р·Р°РїРёСЃРµР№!\n");
         fclose(file);
         *count = 0;
         return;
     }
 
-    // массив структур
+    // РјР°СЃСЃРёРІ СЃС‚СЂСѓРєС‚СѓСЂ
     fread(flights, sizeof(Flight), *count, file);
 
     fclose(file);
-    printf("Загружено %d рейсов из файла %s\n", *count, FILENAME);
+    printf("Р—Р°РіСЂСѓР¶РµРЅРѕ %d СЂРµР№СЃРѕРІ РёР· С„Р°Р№Р»Р° %s\n", *count, FILENAME);
 }
 
-// в файл
+// РІ С„Р°Р№Р»
 void saveToFile(Flight flights[], int count) 
 {
     FILE* file = fopen(FILENAME, "wb");
 
     if (file == NULL) 
     {
-        printf("Ошибка\n");
+        printf("РћС€РёР±РєР°\n");
         return;
     }
 
-    // количество рейсов
+    // РєРѕР»РёС‡РµСЃС‚РІРѕ СЂРµР№СЃРѕРІ
     fwrite(&count, sizeof(int), 1, file);
 
-    // массив структур
+    // РјР°СЃСЃРёРІ СЃС‚СЂСѓРєС‚СѓСЂ
     fwrite(flights, sizeof(Flight), count, file);
 
     fclose(file);
-    printf("Сохранено %d рейсов в файл %s\n", count, FILENAME);
+    printf("РЎРѕС…СЂР°РЅРµРЅРѕ %d СЂРµР№СЃРѕРІ РІ С„Р°Р№Р» %s\n", count, FILENAME);
 }
 
-// добавление нового
+// РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ
 void addFlight(Flight flights[], int* count) 
 {
     if (*count >= MAX_FLIGHTS) 
     {
-        printf("Максимальный размер массива!\n");
+        printf("РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°!\n");
         return;
     }
 
     Flight newFlight;
 
-    printf("\n--- ДОБАВЛЕНИЕ НОВОГО РЕЙСА ---\n");
+    printf("\n--- Р”РћР‘РђР’Р›Р•РќРР• РќРћР’РћР“Рћ Р Р•Р™РЎРђ ---\n");
 
-    printf("Номер рейса: ");
+    printf("РќРѕРјРµСЂ СЂРµР№СЃР°: ");
     scanf("%d", &newFlight.number);
 
-    printf("Направление: ");
+    printf("РќР°РїСЂР°РІР»РµРЅРёРµ: ");
     scanf("%s", newFlight.direction);
 
-    printf("Марка самолета: ");
+    printf("РњР°СЂРєР° СЃР°РјРѕР»РµС‚Р°: ");
     scanf("%s", newFlight.aircraft);
 
-    printf("Расстояние (км): ");
+    printf("Р Р°СЃСЃС‚РѕСЏРЅРёРµ (РєРј): ");
     scanf("%d", &newFlight.distance);
 
-    printf("Время вылета (часы минуты): ");
+    printf("Р’СЂРµРјСЏ РІС‹Р»РµС‚Р° (С‡Р°СЃС‹ РјРёРЅСѓС‚С‹): ");
     scanf("%d %d", &newFlight.departure.hours, &newFlight.departure.minutes);
 
-    printf("Время прилета (часы минуты): ");
+    printf("Р’СЂРµРјСЏ РїСЂРёР»РµС‚Р° (С‡Р°СЃС‹ РјРёРЅСѓС‚С‹): ");
     scanf("%d %d", &newFlight.arrival.hours, &newFlight.arrival.minutes);
 
     flights[*count] = newFlight;
     (*count)++;
 
-    printf("Рейс успешно добавлен!\n");
+    printf("Р РµР№СЃ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅ!\n");
 }
 
-// редактирование рейса
+// СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЂРµР№СЃР°
 void editFlight(Flight flights[], int count) 
 {
     int index;
 
     printArray(flights, count);
 
-    printf("\nВведите номер рейса для редактирования (1-%d): ", count);
+    printf("\nР’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СЂРµР№СЃР° РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ (1-%d): ", count);
     scanf("%d", &index);
 
     if (index < 1 || index > count) 
     {
-        printf("Неверный номер\n");
+        printf("РќРµРІРµСЂРЅС‹Р№ РЅРѕРјРµСЂ\n");
         return;
     }
 
-    index--; // перевод в 0 инд
+    index--; // РїРµСЂРµРІРѕРґ РІ 0 РёРЅРґ
 
-    printf("\nРедактирование рейса %d:\n", flights[index].number);
+    printf("\nР РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЂРµР№СЃР° %d:\n", flights[index].number);
 
-    printf("Новый номер рейса [%d]: ", flights[index].number);
+    printf("РќРѕРІС‹Р№ РЅРѕРјРµСЂ СЂРµР№СЃР° [%d]: ", flights[index].number);
     int temp;
     if (scanf("%d", &temp) == 1) 
     {
         flights[index].number = temp;
     }
 
-    printf("Новое направление [%s]: ", flights[index].direction);
+    printf("РќРѕРІРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ [%s]: ", flights[index].direction);
     char buf[50];
     getchar(); 
     if (fgets(buf, sizeof(buf), stdin) != NULL && buf[0] != '\n') 
@@ -363,25 +363,25 @@ void editFlight(Flight flights[], int count)
         strcpy(flights[index].direction, buf);
     }
 
-    printf("Рейс успешно отредактирован!\n");
+    printf("Р РµР№СЃ СѓСЃРїРµС€РЅРѕ РѕС‚СЂРµРґР°РєС‚РёСЂРѕРІР°РЅ!\n");
 }
 
-// поиск рейса
+// РїРѕРёСЃРє СЂРµР№СЃР°
 Flight* searchFlight(Flight flights[], int count) 
 {
     int choice;
-    printf("\n--- ПОИСК РЕЙСА ---\n");
-    printf("Поиск по:\n");
-    printf("1. Номеру рейса\n");
-    printf("2. Направлению\n");
-    printf("3. Марке самолета\n");
-    printf("Выберите поле для поиска: ");
+    printf("\n--- РџРћРРЎРљ Р Р•Р™РЎРђ ---\n");
+    printf("РџРѕРёСЃРє РїРѕ:\n");
+    printf("1. РќРѕРјРµСЂСѓ СЂРµР№СЃР°\n");
+    printf("2. РќР°РїСЂР°РІР»РµРЅРёСЋ\n");
+    printf("3. РњР°СЂРєРµ СЃР°РјРѕР»РµС‚Р°\n");
+    printf("Р’С‹Р±РµСЂРёС‚Рµ РїРѕР»Рµ РґР»СЏ РїРѕРёСЃРєР°: ");
     scanf("%d", &choice);
 
     if (choice == 1) 
     {
         int number;
-        printf("Введите номер рейса: ");
+        printf("Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СЂРµР№СЃР°: ");
         scanf("%d", &number);
 
         for (int i = 0; i < count; i++) 
@@ -395,7 +395,7 @@ Flight* searchFlight(Flight flights[], int count)
     else if (choice == 2) 
     {
         char direction[50];
-        printf("Введите направление: ");
+        printf("Р’РІРµРґРёС‚Рµ РЅР°РїСЂР°РІР»РµРЅРёРµ: ");
         scanf("%s", direction);
 
         for (int i = 0; i < count; i++) 
@@ -409,7 +409,7 @@ Flight* searchFlight(Flight flights[], int count)
     else if (choice == 3) 
     {
         char aircraft[30];
-        printf("Введите марку самолета: ");
+        printf("Р’РІРµРґРёС‚Рµ РјР°СЂРєСѓ СЃР°РјРѕР»РµС‚Р°: ");
         scanf("%s", aircraft);
 
         for (int i = 0; i < count; i++) 
@@ -424,42 +424,42 @@ Flight* searchFlight(Flight flights[], int count)
     return NULL;
 }
 
-// сортировка
+// СЃРѕСЂС‚РёСЂРѕРІРєР°
 void sortFlights(Flight flights[], int count) 
 {
     int choice;
 
-    printf("\n--- СОРТИРОВКА РЕЙСОВ ---\n");
-    printf("Сортировать по:\n");
-    printf("1. Номеру рейса\n");
-    printf("2. Расстоянию\n");
-    printf("3. Времени вылета\n");
-    printf("Выберите поле для сортировки: ");
+    printf("\n--- РЎРћР РўРР РћР’РљРђ Р Р•Р™РЎРћР’ ---\n");
+    printf("РЎРѕСЂС‚РёСЂРѕРІР°С‚СЊ РїРѕ:\n");
+    printf("1. РќРѕРјРµСЂСѓ СЂРµР№СЃР°\n");
+    printf("2. Р Р°СЃСЃС‚РѕСЏРЅРёСЋ\n");
+    printf("3. Р’СЂРµРјРµРЅРё РІС‹Р»РµС‚Р°\n");
+    printf("Р’С‹Р±РµСЂРёС‚Рµ РїРѕР»Рµ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё: ");
     scanf("%d", &choice);
 
     switch (choice) 
     {
     case 1:
         qsort(flights, count, sizeof(Flight), compareByNumber);
-        printf("Отсортировано по номеру рейса.\n");
+        printf("РћС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРѕ РїРѕ РЅРѕРјРµСЂСѓ СЂРµР№СЃР°.\n");
         break;
     case 2:
         qsort(flights, count, sizeof(Flight), compareByDistance);
-        printf("Отсортировано по расстоянию.\n");
+        printf("РћС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРѕ РїРѕ СЂР°СЃСЃС‚РѕСЏРЅРёСЋ.\n");
         break;
     case 3:
         qsort(flights, count, sizeof(Flight), compareByDeparture);
-        printf("Отсортировано по времени вылета.\n");
+        printf("РћС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРѕ РїРѕ РІСЂРµРјРµРЅРё РІС‹Р»РµС‚Р°.\n");
         break;
     default:
-        printf("Неверный выбор!\n");
+        printf("РќРµРІРµСЂРЅС‹Р№ РІС‹Р±РѕСЂ!\n");
         return;
     }
 
     printArray(flights, count);
 }
 
-// сравнение
+// СЃСЂР°РІРЅРµРЅРёРµ
 int compareByNumber(const void* a, const void* b) 
 {
     const Flight* flightA = (const Flight*)a;
@@ -485,11 +485,11 @@ int compareByDeparture(const void* a, const void* b)
     const Flight* flightA = (const Flight*)a;
     const Flight* flightB = (const Flight*)b;
 
-    // часы
+    // С‡Р°СЃС‹
     if (flightA->departure.hours < flightB->departure.hours) return -1;
     if (flightA->departure.hours > flightB->departure.hours) return 1;
 
-    // минуты
+    // РјРёРЅСѓС‚С‹
     if (flightA->departure.minutes < flightB->departure.minutes) return -1;
     if (flightA->departure.minutes > flightB->departure.minutes) return 1;
 
