@@ -67,23 +67,6 @@ void find_max_module(double** A, int n, int m, int* max_i, int* max_j)
     }
 }
 
-void swap_r(double** A, int row1, int row2) // ???
-{
-    double* temp = A[row1];
-    A[row1] = A[row2];
-    A[row2] = temp;
-}
-
-void swap_c(double** A, int n, int col1, int col2) // ???
-{
-    for (int i = 0; i < n; i++)
-    {
-        double temp = A[i][col1];
-        A[i][col1] = A[i][col2];
-        A[i][col2] = temp;
-    }
-}
-
 int input_k(int n, int m)
 {
     int k;
@@ -213,7 +196,9 @@ int main()
                 // меняем строки местами  
                 if (imax != k)
                 {
-                    swap_r(A, imax, k);
+                    double* temp = A[imax];
+                    A[imax] = A[k];
+                    A[k] = temp;
                 }
                 else
                 {
@@ -223,7 +208,12 @@ int main()
                 // меняем столбцы местами  
                 if (jmax != k)
                 {
-                    swap_c(A, n, jmax, k);
+                    for (int i = 0; i < n; i++)
+                    {
+                        double temp = A[i][jmax];
+                        A[i][jmax] = A[i][k];
+                        A[i][k] = temp;
+                    }
                 }
                 else
                 {
@@ -253,7 +243,9 @@ int main()
                 // меняем строки местами
                 if (imax != k)
                 {
-                    swap_r(A, imax, k);
+                    double* temp = A[imax];
+                    A[imax] = A[k];
+                    A[k] = temp;
                     printf("Поменяли строки %d и %d\n", imax, k);
                 }
                 else
@@ -264,7 +256,12 @@ int main()
                 // меняем столбцы местами  
                 if (jmax != k)
                 {
-                    swap_c(A, n, jmax, k);
+                    for (int i = 0; i < n; i++)
+                    {
+                        double temp = A[i][jmax];
+                        A[i][jmax] = A[i][k];
+                        A[i][k] = temp;
+                    }
                     printf("Поменяли столбцы %d и %d\n", jmax, k);
                 }
                 else
