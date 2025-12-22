@@ -5,15 +5,14 @@
 #include <locale.h>
 #include <time.h>
 
-// прототипы
-double** sort(double** A, int n, int m);
-double** file_matrix(double** A, int n, int m, const char* filename);
-double** input_matrix(double** A, int n, int m);
-double** random_matrix(double** A, int n, int m);
-void print_matrix(double** A, int n, int m);
-double find_max_module(double** A, int n, int m, int* max_i, int* max_j);
-int val_k(int k, int n, int m);
-double** move_max(double** A, int n, int m, int k, int jmax, int imax);
+double** file_matrix(double** A, int n, int m, const char* filename); // функция ввода матрицы с клавиатуры
+double** input_matrix(double** A, int n, int m); // функция заполнения матрицы случайными числами
+double** random_matrix(double** A, int n, int m); // функция чтения матрицы из файла
+double** sort(double** A, int n, int m); // функция сортировки столбцов матрицы
+void print_matrix(double** A, int n, int m); // функция вывода матрицы
+double find_max_module(double** A, int n, int m, int* max_i, int* max_j); // функция поиска максимального по модулю элемента
+int validate_k(int k, int n, int m); // функция проверки корректности k
+double** move_max(double** A, int n, int m, int k, int jmax, int imax); // функция перемещения максимального элемента
 
 int main()
 {
@@ -41,23 +40,23 @@ int main()
     printf("\n");
     printf("\n");
     printf("\n");
-    int work = 1;
+    int work = 1; /* флаг продолжения работы программы */
     while (work)
     {
-        int n, m, k;
-        int c1 = 0, vc1 = 0;
-        int c2 = 0, vc2 = 0;
-        int choice; int imax, jmax;
-        int valid_in = 0; char filename[100];
-        double max_val;
+        int n, m, k; // n - строки, m - столбцы, k - целевая позиция
+        int choice_input = 0, input_done = 0; // выбор и флаг завершения заполнения матрицы
+        int choice_output = 0, output_done = 0; // выбор и флаг завершения вывода результатов
+        int imax, jmax; // координаты максимального элемента
+        int valid_k = 0; // флаг корректности значения k
+        char filename[100]; // имя файла для чтения
+        double max_val; // значение максимального элемента
 
-        // ввод размеров матрицы
         printf("Введите количество строк n: ");
         scanf("%d", &n);
         printf("Введите количество столбцов m: ");
         scanf("%d", &m);
 
-        // создаем матрицу как массив указателей
+        /* выделение памяти под массив */
         double** A = (double**)malloc(n * sizeof(double*));
         if (A == NULL)
         {
@@ -69,27 +68,27 @@ int main()
             A[i] = (double*)malloc(m * sizeof(double));
         }
 
-        while (!vc1)
+        while (!input_done) /* выбор способа заполнения массива */
         {
             printf("\nСпособ заполнения матрицы:\n");
             printf("1. Ввод с консоли\n");
             printf("2. Случайные числа\n");
             printf("3. Чтение из файла\n");
             printf("Выберите способ: ");
-            scanf("%d", &c1);
+            scanf("%d", &choice_input);
 
-            switch (c1)
+            switch (choice_input) /* инициализация по выбору пользователя */
             {
             case 1:
 
                 input_matrix(A, n, m);
-                vc1 = 1;
+                input_done = 1;
                 break;
 
             case 2:
 
                 random_matrix(A, n, m);
-                vc1 = 1;
+                input_done = 1;
                 break;
 
             case 3:
@@ -97,7 +96,7 @@ int main()
                 printf("Введите имя файла: ");
                 scanf("%s", filename);
                 file_matrix(A, n, m, filename);
-                vc1 = 1;
+                input_done = 1;
                 break;
 
             default:
@@ -107,23 +106,22 @@ int main()
 
             }
         }
-        while (!vc2)
+        while (!output_done) /* выбор способа вывода массива */
         {
             printf("\nСпособ вывода результатов:\n");
             printf("1. Простой вывод (только массивы)\n");
             printf("2. Подробный вывод с комментариями\n");
             printf("Выберите способ: ");
-            scanf("%d", &c2);
+            scanf("%d", &choice_output); 
 
-            // ввод К
-            while (!valid_in)
+            while (!valid_k) /* ввод и проверка значения k */
             {
                 printf("Введите k: ");
                 scanf("%d", &k);
 
-                if (val_k(k, n, m))
+                if (validate_k(k, n, m))
                 {
-                    valid_in = 1;
+                    valid_k = 1;
                 }
                 else
                 {
@@ -131,7 +129,7 @@ int main()
                 }
             }
 
-            switch (c2)
+            switch (choice_output) /*вывод результатов по выбору пользователя*/
             {
             case 1:
 
@@ -142,14 +140,12 @@ int main()
                 sort(A, n, m);
                 print_matrix(A, n, m);
 
-                // смена строк и столбцов
                 max_val = find_max_module(A, n, m, &imax, &jmax);
                 move_max(A, n, m, k, jmax, imax);
 
-                // вывод результата
                 printf("\nРезультат:\n");
                 print_matrix(A, n, m);
-                vc2 = 1;
+                output_done = 1;
                 break;
 
             case 2:
@@ -168,14 +164,12 @@ int main()
                 printf("\nМаксимальный элемент: %.2f в позиции [%d][%d]\n", max_val, imax, jmax);
                 printf("k = %d\n", k);
 
-                // смена строк и столбцов
                 move_max(A, n, m, k, jmax, imax);
 
-                // вывод результата
                 printf("\n=== ПРЕОБРАЗОВАННЫЙ МАССИВ ===\n");
                 print_matrix(A, n, m);
                 printf("\nМаксимальный элемент теперь в A[%d][%d] = %.2f\n", k, k, A[k][k]);
-                vc2 = 1;
+                output_done = 1;
                 break;
 
             default:
@@ -183,21 +177,21 @@ int main()
                 break;
             }
         }
-        // освобождаем память
-        for (int i = 0; i < n; i++)
+        
+        for (int i = 0; i < n; i++) /* освобождение памяти */
         {
             free(A[i]);
         }
         free(A);
-        // запрос на продолжение работы
+
         printf("\n=================================\n");
         printf("Хотите продолжить работу?\n");
         printf("1. Продолжить (создать новую матрицу)\n");
         printf("2. Завершить работу\n");
         printf("Выберите действие: ");
-        scanf("%d", &choice);
+        scanf("%d", &choice_input);
 
-        if (choice == 2)
+        if (choice_input == 2)
         {
             work = 0;
             printf("Работа программы завершена\n");
@@ -207,27 +201,24 @@ int main()
             printf("\nПродолжаем работу...\n");
             printf("=================================\n\n");
         }
-        vc1 = 0;
-        vc2 = 0;
-        valid_in = 0;  // сбрасываем для следующей итерации
+        input_done = 0;
+        output_done = 0;
+        valid_k = 0;  // сбрасываем для следующей итерации
     }
 
     system("pause");
     return 0;
 }
 
-// реализация функций
-double** sort(double** A, int n, int m)
-{
-    for (int col = 0; col < m; col++)
+double** sort(double** A, int n, int m)    // функция предназначена для того, чтобы 
+{                                          // отсортировать каждый столбец матрицы
+    for (int col = 0; col < m; col++)      // по возрастанию методом выбора
     {
-        // Сортировка выбором для текущего столбца
         for (int i = 0; i < n - 1; i++)
         {
             int min_idx = i;
 
-            // Находим минимальный элемент в столбце от i до n-1
-            for (int j = i + 1; j < n; j++)
+            for (int j = i + 1; j < n; j++) // находим минимальный элемент в столбце
             {
                 if (A[j][col] < A[min_idx][col])
                 {
@@ -235,8 +226,7 @@ double** sort(double** A, int n, int m)
                 }
             }
 
-            // Меняем местами элементы столбца
-            if (min_idx != i)
+            if (min_idx != i) // меняем местами элементы столбца
             {
                 double temp = A[i][col];
                 A[i][col] = A[min_idx][col];
@@ -249,16 +239,16 @@ double** sort(double** A, int n, int m)
 
 double** file_matrix(double** A, int n, int m, const char* filename)
 {
-    FILE* file = fopen(filename, "r");
-    if (file == NULL)
+    FILE* file = fopen(filename, "r");              // функция предназначена для того, чтобы
+    if (file == NULL)                               // заполнить матрицу числами из файла
     {
         printf("Ошибка, не удалось открыть файл\n");
         return A;
     }
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++) // читаем построчно: сначала первую строку матрицы
     {
-        for (int j = 0; j < m; j++)
+        for (int j = 0; j < m; j++) // в каждой строке читаем все элементы столбцов
         {
             if (fscanf(file, "%lf", &A[i][j]) != 1)
             {
@@ -275,7 +265,6 @@ double** file_matrix(double** A, int n, int m, const char* filename)
 
 double** input_matrix(double** A, int n, int m)
 {
-    // ввод элементов матрицы с консоли
     printf("Введите элементы матрицы %dx%d:\n", n, m);
     for (int i = 0; i < n; i++)
     {
@@ -290,20 +279,19 @@ double** input_matrix(double** A, int n, int m)
 
 double** random_matrix(double** A, int n, int m)
 {
-    // заполнение случайными числами
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
+    for (int i = 0; i < n; i++)                   // функция предназначена для того, чтобы
+    {                                             // массив инициализировался случайными
+        for (int j = 0; j < m; j++)               // сгенерированными числами от -10.00 до 10.00
         {
-            A[i][j] = (double)(rand() % 2001 - 1000) / 100.0; // числа от -10.00 до 10.00
+            A[i][j] = (double)(rand() % 2001 - 1000) / 100.0;
         }
     }
     printf("Массив заполнен случайными числами от -10.00 до 10.00\n");
     return A;
 }
 
-void print_matrix(double** A, int n, int m)
-{
+void print_matrix(double** A, int n, int m)   // функция предназначена для того, чтобы
+{                                             // массив выводился на экран 
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
@@ -316,9 +304,9 @@ void print_matrix(double** A, int n, int m)
 
 double find_max_module(double** A, int n, int m, int* max_i, int* max_j)
 {
-    double max_sq = A[0][0] * A[0][0];
-    *max_i = 0;
-    *max_j = 0;
+    double max_sq = A[0][0] * A[0][0];   // функция предназначена для того, чтобы
+    *max_i = 0;                          // найти элемент с максимальным модулем
+    *max_j = 0;                          // и вернуть его координаты
 
     for (int i = 0; i < n; i++)
     {
@@ -333,12 +321,12 @@ double find_max_module(double** A, int n, int m, int* max_i, int* max_j)
             }
         }
     }
-    return A[*max_i][*max_j]; // возвр значение элемента
+    return A[*max_i][*max_j]; // возвращаем значение максимального элемента
 }
 
-int val_k(int k, int n, int m) // проверка К что она не выходит за пределы массива
-{
-    if (k < 0 || k >= n || k >= m)
+int validate_k(int k, int n, int m)       // функция предназначена для того, чтобы
+{                                         // проверить корректность значения k
+    if (k < 0 || k >= n || k >= m)        // (k должно быть в пределах матрицы)
     {
         printf("Ошибка, k должна быть в диапазоне\n");
         return 0;
@@ -346,10 +334,10 @@ int val_k(int k, int n, int m) // проверка К что она не вых�
     return 1;
 }
 
-double** move_max(double** A, int n, int m, int k, int jmax, int imax) //перемещаем элемент
-{
-    if (imax != k)
-    {
+double** move_max(double** A, int n, int m, int k, int jmax, int imax) 
+{                          // функция предназначена для того, чтобы
+    if (imax != k)         // переместить максимальный элемент на позицию [k][k]
+    {                      // путем перестановки строк и столбцов
         double* temp = A[imax];
         A[imax] = A[k];
         A[k] = temp;
