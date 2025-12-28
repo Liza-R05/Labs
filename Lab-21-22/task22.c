@@ -2,31 +2,31 @@
 #include <stdio.h>
 #include <math.h>
 #include <locale.h>
-#define MENU_EXIT 0
-#define MENU_CALCULATE 1
-#define MENU_TABULATE 2
-#define MENU_OPERATION 3
+#include <string.h>
 #define SCREENW 60
 #define SCREENH 40
 
 // тип указателя на функцию
 typedef double (*TFun)(double);
+
 // прототипы
 double fun1(double);
 double fun2(double);
 double fun3(double);
-void t_rez(TFun, double, double, double);
-void plot(double, double, TFun);
-void tabulate_function(TFun);
-void calculate_value(TFun);
-void plot_function(TFun);
+void tabulate_function(TFun, double, double, double, int*); // возвращает количество точек
+void plot(double, double, TFun, char screen[SCREENW][SCREENH]); // только заполняет массив
+double calculate_at_point(TFun, double); // просто вычисляет значение
 
-int main() 
+int main()
 {
     setlocale(LC_ALL, "RUS");
     int choice, func_choice;
     TFun selected_func = NULL;
-    char func_name[50];
+    char* func_name;
+    double a, b, h, x, result;
+    int count;
+    char screen[SCREENW][SCREENH];
+
     do
     {
         printf("\n\n-----       МЕНЮ ПРОГРАММЫ      -----\n");
@@ -38,10 +38,17 @@ int main()
         printf("----------------------------------------\n");
         printf("Ваш выбор: ");
         scanf("%d", &choice);
-        if (choice == MENU_EXIT) 
+
+        if (choice == 0)
         {
             printf("Выход из программы...\n");
             break;
+        }
+
+        if (choice < 1 || choice > 3)
+        {
+            printf("Неверный выбор!\n");
+            continue;
         }
 
         printf("-----       ВЫБОР ФУНКЦИИ      -----\n");
@@ -52,214 +59,256 @@ int main()
         printf("Выберите функцию: ");
         scanf("%d", &func_choice);
 
-        switch (func_choice) 
+        switch (func_choice)
         {
         case 1:
             selected_func = fun1;
-            strcpy(func_name, "f1(x) = 2 * e^(x^2)");
+            func_name = "2 * e^(x^2)";
             break;
         case 2:
             selected_func = fun2;
-            strcpy(func_name, "f2(x) = sin^2(x)");
+            func_name = "sin^2(x)";
             break;
         case 3:
             selected_func = fun3;
-            strcpy(func_name, "f3(x) = ln(tg(x^2))");
+            func_name = "ln(tg(x^2))";
             break;
         default:
-            printf("Неверный выбор\n");
-            system("pause");
-            break;
+            printf("Неверный выбор функции\n");
+            continue;
         }
 
-        switch (choice) 
+        switch (choice)
         {
-        case MENU_CALCULATE:
-            calculate_value(selected_func);
-            break;
-        case MENU_TABULATE:
-            tabulate_function(selected_func);
-            break;
-        case MENU_OPERATION:
-            plot_function(selected_func);
-            break;
-        default:
-            printf("Неверный выбор\n");
-        }
-        getchar();
-    } while (choice != MENU_EXIT);
+        case 1:
+            printf("\nВычисление значения функции: %s\n", func_name);
+            printf("Введите значение x: ");
+            scanf("%lf", &x);
 
-    system("pause");
+            result = calculate_at_point(selected_func, x);
+            if (result != result)
+                printf("f(%.3lf) = не определено\n", x);
+            else
+                printf("f(%.3lf) = %.6lf\n", x, result);
+            break;
+
+        case 2:
+            printf("\nТабуляция функции: %s\n", func_name);
+            printf("Введите начало интервала (a): ");
+            scanf("%lf", &a);
+            printf("Введите конец интервала (b): ");
+            scanf("%lf", &b);
+            printf("Введите шаг табуляции (h): ");
+            scanf("%lf", &h);
+
+            if (h <= 0) 
+            {
+                printf("Ошибка: шаг должен быть больше 0\n");
+                break;
+            }
+            if (a > b) 
+            {
+                printf("Ошибка: начало должно быть меньше конца\n");
+                break;
+            }
+
+            printf("\nРезультаты табуляции:\n");
+            printf("---------------------\n");
+            printf("     x     |     f(x)     \n");
+            printf("-----------+-------------\n");
+
+            tabulate_function(selected_func, a, b, h, &count);
+
+            printf("-------------------------\n");
+            printf("Вычислено значений: %d\n", count);
+            break;
+
+        case 3:
+            printf("\nПостроение графика функции: %s\n", func_name);
+            printf("Введите начало интервала: ");
+            scanf("%lf", &a);
+            printf("Введите конец интервала: ");
+            scanf("%lf", &b);
+
+            if (a >= b) {
+                printf("Ошибка: начало должно быть меньше конца!\n");
+                break;
+            }
+
+            printf("\nСтроим график...\n\n");
+            plot(a, b, selected_func, screen);
+
+            // Вывод графика в main
+            for (int j = 0; j < SCREENH; ++j)
+            {
+                for (int i = 0; i < SCREENW; ++i)
+                    putchar(screen[i][j]);
+                putchar('\n');
+            }
+            break;
+        }
+
+        getchar();
+
+    } while (choice != 0);
+
     return 0;
 }
 
 // 2 * e^(x^2)
-double fun1(double x) 
+double fun1(double x)
 {
     return 2 * exp(x * x);
 }
 
 // sin^2(x)
-double fun2(double x) 
+double fun2(double x)
 {
     double s = sin(x);
     return s * s;
 }
 
 // ln(tg(x^2))
-double fun3(double x) 
+double fun3(double x)
 {
     double x2 = x * x;
     double tg_val = tan(x2);
+    if (tg_val <= 0) return NAN;
     return log(tg_val);
 }
 
-void calculate_value(TFun f)
+// вычисляет значение в точке
+double calculate_at_point(TFun f, double x)
 {
-    double x, result;
-    printf("---   ВЫЧИСЛЕНИЕ ЗНАЧЕНИЯ ФУНКЦИИ   ---\n");
-    printf("---------------------------------------\n");
-    printf("Введите значение x: ");
-    scanf("%lf", &x);
-
-    result = f(x);
-    printf("f(%.3lf) = %.6lf\n", x, result);
+    return f(x);
 }
 
-void tabulate_function(TFun f)
+void tabulate_function(TFun f, double xn, double xk, double h, int* count)
 {
-    double a, b, h;
-    printf("Табуляция функций\n");
-    printf("-----------------\n\n");
+    *count = 0;
 
-    printf("Введите начало интервала (a): ");
-    scanf("%lf", &a);
-    printf("Введите конец интервала (b): ");
-    scanf("%lf", &b);
-    printf("Введите шаг табуляции (h): ");
-    scanf("%lf", &h);
-
-    printf("\n");
-    printf("Результаты табуляции:\n");
-    printf("---------------------\n\n");
-    t_rez(f, a, b, h);
-}
-
-void plot(double x0, double x1, TFun f)
-{
-    char screen[SCREENW][SCREENH];
-    double x, y[SCREENW];
-    double ymin = 0, ymax = 0;
-    double hx, hy;
-    int i, j;
-    int xz, yz;
-
-    hx = (x1 - x0) / (SCREENW - 1);
-
-    for (i = 0, x = x0; i < SCREENW; ++i, x += hx) 
+    for (double x = xn; x <= xk + 0.000001; x += h, (*count)++)
     {
-        y[i] = f(x); //расчет значений функции для каждой точки поля вывода графика
-        if (y[i] < ymin) ymin = y[i];
-        if (y[i] > ymax) ymax = y[i];
-    }
+        double y = f(x);
 
-    hy = (ymax - ymin) / (SCREENH - 1);
-    yz = (int)floor(ymax / hy + 0.5);
-    xz = (int)floor((0. - x0) / hx + 0.5);
+        if (y != y)
+            printf("%9.3lf  |  не определена\n", x);
+        else
+            printf("%9.3lf  | %12.6lf\n", x, y);
 
-    //построение осей и заполнение массива отображения пробелами
-    for (j = 0; j < SCREENH; ++j)
-        for (i = 0; i < SCREENW; ++i) 
-        {
-            if (j == yz && i == xz) screen[i][j] = '+';
-            else if (j == yz) screen[i][j] = '-';
-            else if (i == xz) screen[i][j] = '|';
-            else screen[i][j] = ' ';
-        }
-
-    //определение положения значения функции на поле вывода
-    for (i = 0; i < SCREENW; ++i) 
-    {
-        j = (int)floor((ymax - y[i]) / hy + 0.5);
-        screen[i][j] = '*';
-    }
-
-    //печать массива символов
-    for (j = 0; j < SCREENH; ++j) 
-    {
-        for (i = 0; i < SCREENW; ++i)  putchar(screen[i][j]);
-        putchar('\n');
-    }
-}
-
-void plot_function(TFun f)
-{
-    double a, b;
-
-    printf("\n-----  ПОСТРОЕНИЕ ГРАФИКА ФУНКЦИИ  -----\n");
-    printf("Введите начало интервала: ");
-    scanf("%lf", &a);
-    printf("Введите конец интервала: ");
-    scanf("%lf", &b);
-
-    if (a >= b) {
-        printf("Ошибка: начало должно быть меньше конца!\n");
-        return;
-    }
-
-    printf("\nСтроим график...\n\n");
-    plot(a, b, f);
-}
-
-void t_rez(TFun f, double xn, double xk, double h) 
-{
-    int count = 0;  // счетчик
-
-    if (h <= 0) 
-    {
-        printf("Ошибка, шаг не больше 0\n");
-        return;
-    }
-
-    if (xn > xk) 
-    {
-        printf("Ошибка, начало конца\n");
-        return;
-    }
-
-    printf("     x     |     f(x)     \n");
-    printf("-----------+-------------\n");
-
-    for (double x = xn; x <= xk + 0.000001; x += h) 
-    {
-        double y;
-        // проверки для третьей функции
-        if (f == fun3) 
-        {
-            double x2 = x * x;
-            // tg(x^2) не определен при cos(x^2) = 0
-            // ln не определен для отрицательных чисел
-            if (cos(x2) == 0 || tan(x2) <= 0) 
-            {
-                printf("%9.3lf  |  не определена\n", x);
-                count++;
-                continue;
-            }
-        }
-
-        y = f(x);
-
-        printf("%9.3lf  | %12.6lf\n", x, y);
-        count++;
-
-        if (count >= 15 && x + h <= xk) 
+        if (*count >= 15 && x + h <= xk)
         {
             printf("     ...    |     ...     \n");
             printf("(вывод ограничен 15 знач.)\n");
             break;
         }
+
+    }
+}
+
+// заполняет массив для графика
+void plot(double x0, double x1, TFun f, char screen[SCREENW][SCREENH])
+{
+    double x, y[SCREENW];
+    double ymin = 0, ymax = 0;
+    double hx, hy; // шаги по x и y 
+    int i, j;
+    int xz, yz; // координаты пересечения осей
+
+    // делим интервал на SCREENW-1 частей
+    hx = (x1 - x0) / (SCREENW - 1);
+
+    for (i = 0, x = x0; i < SCREENW; ++i, x += hx)
+    {
+        // функция в точке х
+        y[i] = f(x);
+
+        // минимальное и максимальное функции
+        if (i == 0)
+        {
+            // инициализируем min и max
+            ymin = y[i];
+            ymax = y[i];
+        }
+        else
+        {
+            // обновляем min и max
+            if (y[i] < ymin) 
+            {
+                ymin = y[i];
+            }
+            if (y[i] > ymax) 
+            {
+                ymax = y[i];
+            }
+        }
     }
 
-    printf("-------------------------\n");
-    printf("Вычислено значений: %d\n", count);
+    // если все значения функции одинаковы
+    if (ymax == ymin)
+    {
+        ymin -= 1;  // сдвигаем минимум вниз
+        ymax += 1;  // максимум вверх
+    }
+
+    // диапазон значений в экранные координаты
+    hy = (ymax - ymin) / (SCREENH - 1);
+    if (hy == 0) 
+    {
+        hy = 1;  // от деления на 0
+    }
+
+    // yz - экр коор оси X (y=0)
+    yz = (int)floor((ymax - 0) / hy + 0.5);
+    // xz - экр коор оси Y (x=0)
+    xz = (int)floor((0. - x0) / hx + 0.5);
+
+    for (j = 0; j < SCREENH; ++j)
+    {
+        for (i = 0; i < SCREENW; ++i)
+        {
+            screen[i][j] = ' ';  // весь экран пробелами
+        }
+    }
+
+    if (yz >= 0 && yz < SCREENH)  // oX в пределах экрана
+    {
+        for (i = 0; i < SCREENW; ++i)
+            screen[i][yz] = '-';
+    }
+
+    if (xz >= 0 && xz < SCREENW)  // oY в пределах экрана
+    {
+        for (j = 0; j < SCREENH; ++j)
+            screen[xz][j] = '|';
+    }
+
+    // пересечение
+    if (yz >= 0 && yz < SCREENH && xz >= 0 && xz < SCREENW)
+    {
+        screen[xz][yz] = '+';
+    }
+
+    // построение графика
+    for (i = 0; i < SCREENW; ++i)
+    {
+        // значение функции в экр коор
+        j = (int)floor((ymax - y[i]) / hy + 0.5);
+        // в пределах экрана, есть пробел
+        if (j >= 0 && j < SCREENH && screen[i][j] == ' ')
+        {
+            screen[i][j] = '*';
+        }
+    }
+
+    // вывод
+    for (j = 0; j < SCREENH; ++j)
+    {
+        // Вывод одной строки экрана
+        for (i = 0; i < SCREENW; ++i)
+        {
+            putchar(screen[i][j]);
+        }
+        putchar('\n');  // на новую строку
+    }
 }
