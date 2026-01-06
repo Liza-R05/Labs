@@ -19,15 +19,15 @@ typedef struct
     struct Node* back;
 } queue_list;
 
-// добавить элемент в очередь
+// РґРѕР±Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґСЊ
 void enQueue(queue_list* que, TYPE element) 
 {
-    // создаем новый узел
+    // СЃРѕР·РґР°РµРј РЅРѕРІС‹Р№ СѓР·РµР»
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = element;
     newNode->next = NULL;
 
-    // если очередь пуста
+    // РµСЃР»Рё РѕС‡РµСЂРµРґСЊ РїСѓСЃС‚Р°
     if (que->back == NULL)
     {
         que->front = newNode;
@@ -41,25 +41,25 @@ void enQueue(queue_list* que, TYPE element)
     }
 }
 
-// извлечь элемент из очереди
+// РёР·РІР»РµС‡СЊ СЌР»РµРјРµРЅС‚ РёР· РѕС‡РµСЂРµРґРё
 TYPE deQueue(queue_list* que) 
 {
-    // проверка на пустую очередь
+    // РїСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚СѓСЋ РѕС‡РµСЂРµРґСЊ
     if (que->front == NULL) 
     {
-        return '\0';  // если очередь пуста
+        return '\0';  // РµСЃР»Рё РѕС‡РµСЂРµРґСЊ РїСѓСЃС‚Р°
     }
 
-    // сохраняем данные из начала
+    // СЃРѕС…СЂР°РЅСЏРµРј РґР°РЅРЅС‹Рµ РёР· РЅР°С‡Р°Р»Р°
     TYPE element = que->front->data;
 
-    // сохраняем указатель на удаляемый узел
+    // СЃРѕС…СЂР°РЅСЏРµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СѓРґР°Р»СЏРµРјС‹Р№ СѓР·РµР»
     struct Node* temp = que->front;
 
-    // перемещаем начало
+    // РїРµСЂРµРјРµС‰Р°РµРј РЅР°С‡Р°Р»Рѕ
     que->front = que->front->next;
 
-    // если очередь стала пустой
+    // РµСЃР»Рё РѕС‡РµСЂРµРґСЊ СЃС‚Р°Р»Р° РїСѓСЃС‚РѕР№
     if (que->front == NULL) 
     {
         que->back = NULL;
@@ -67,7 +67,7 @@ TYPE deQueue(queue_list* que)
     }
     else
     {
-        que->queue = que->front; // обновляем queue
+        que->queue = que->front; // РѕР±РЅРѕРІР»СЏРµРј queue
     }
 
     free(temp);
@@ -84,23 +84,23 @@ int main()
     q.front = NULL;
     q.back = NULL;
 
-    printf("Введите строку: ");
+    printf("Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ: ");
     fgets(input, sizeof(input), stdin);
 
-    // убираем символ новой строки
+    // СѓР±РёСЂР°РµРј СЃРёРјРІРѕР» РЅРѕРІРѕР№ СЃС‚СЂРѕРєРё
     size_t len = strlen(input);
     if (len > 0 && input[len - 1] == '\n') 
     {
         input[len - 1] = '\0';
     }
 
-    // заполняем очередь символами строки
+    // Р·Р°РїРѕР»РЅСЏРµРј РѕС‡РµСЂРµРґСЊ СЃРёРјРІРѕР»Р°РјРё СЃС‚СЂРѕРєРё
     for (int i = 0; input[i] != '\0'; i++) 
     {
         enQueue(&q, input[i]);
     }
 
-    printf("\nСодержимое очереди: ");
+    printf("\nРЎРѕРґРµСЂР¶РёРјРѕРµ РѕС‡РµСЂРµРґРё: ");
     while (q.front != NULL) 
     {
         printf("%c", deQueue(&q));
