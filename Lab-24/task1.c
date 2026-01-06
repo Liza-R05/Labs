@@ -13,43 +13,43 @@ typedef struct Stack
     TYPE data[NMAX];
 } stack;
 
-// пуст ли стек {top==0}
+// РїСѓСЃС‚ Р»Рё СЃС‚РµРє {top==0}
 int isempty(stack* s) 
 {
     return s->top == 0;
 }
 
-// полон ли стек {top==NMAX-1}
+// РїРѕР»РѕРЅ Р»Рё СЃС‚РµРє {top==NMAX-1}
 int isfull(stack* s) 
 {
     return s->top == NMAX - 1;
 }
 
-// элемент а в стек {top=top+1, data[top]=a}
+// СЌР»РµРјРµРЅС‚ Р° РІ СЃС‚РµРє {top=top+1, data[top]=a}
 int push(stack* s, TYPE a) 
 {
     if (isfull(s)) 
     {
-        return 0;  // стек полон
+        return 0;  // СЃС‚РµРє РїРѕР»РѕРЅ
     }
     s->top = s->top + 1;
     s->data[s->top] = a;
     return 1;
 }
 
-// вернуть элемент {data[top]}, удалив его из стека {top=top-1}, если стек не пуст
+// РІРµСЂРЅСѓС‚СЊ СЌР»РµРјРµРЅС‚ {data[top]}, СѓРґР°Р»РёРІ РµРіРѕ РёР· СЃС‚РµРєР° {top=top-1}, РµСЃР»Рё СЃС‚РµРє РЅРµ РїСѓСЃС‚
 TYPE pop(stack* s) 
 {
     if (isempty(s)) 
     {
-        return '\0';  // если стек пуст
+        return '\0';  // РµСЃР»Рё СЃС‚РµРє РїСѓСЃС‚
     }
     TYPE value = s->data[s->top];
     s->top = s->top - 1;
     return value;
 }
 
-// вернуть значение элемента в вершине стека {return data[top]}
+// РІРµСЂРЅСѓС‚СЊ Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ РІРµСЂС€РёРЅРµ СЃС‚РµРєР° {return data[top]}
 TYPE top(stack* s)
 {
     if (isempty(s)) 
@@ -59,7 +59,7 @@ TYPE top(stack* s)
     return s->data[s->top];
 }
 
-// вывод содержимого
+// РІС‹РІРѕРґ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ
 void display(stack* s) 
 {
     int i = s->top;
@@ -75,13 +75,13 @@ int main()
     setlocale(LC_ALL, "RUS");
     stack s;
     char input[NMAX];
-    // инициализация стека
+    // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃС‚РµРєР°
     s.top = 0;
 
-    printf("Введите строку: ");
+    printf("Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ: ");
     fgets(input, NMAX, stdin);
 
-    // убрать символ новой строки из ввода
+    // СѓР±СЂР°С‚СЊ СЃРёРјРІРѕР» РЅРѕРІРѕР№ СЃС‚СЂРѕРєРё РёР· РІРІРѕРґР°
     size_t len = strlen(input);
     if (len > 0 && input[len - 1] == '\n') 
     {
@@ -89,17 +89,17 @@ int main()
         len--;
     }
 
-    // заполн стек симв строки
+    // Р·Р°РїРѕР»РЅ СЃС‚РµРє СЃРёРјРІ СЃС‚СЂРѕРєРё
     for (int i = 0; input[i] != '\0'; i++) 
     {
         if (!push(&s, input[i]))
         {
-            printf("Стек переполнен! Можно добавить максимум %d символов.\n", NMAX - 1);
+            printf("РЎС‚РµРє РїРµСЂРµРїРѕР»РЅРµРЅ! РњРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ РјР°РєСЃРёРјСѓРј %d СЃРёРјРІРѕР»РѕРІ.\n", NMAX - 1);
             break;
         }
     }
 
-    printf("\nСодержимое стека: ");
+    printf("\nРЎРѕРґРµСЂР¶РёРјРѕРµ СЃС‚РµРєР°: ");
     display(&s);
 
     return 0;
