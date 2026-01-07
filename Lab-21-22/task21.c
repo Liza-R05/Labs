@@ -49,8 +49,7 @@ int main()
     int choice; int criteria;
     char search_dir[50]; int index;
 
-    /* константными значениями */
-    Flight init_flights[SIZE] = 
+    Flight init_flights[SIZE] = // конст знач
     {
         {101, "Moscow-SPb", "Boeing-737", 650, {10, 30}, {12, 0}},
         {202, "Moscow-Sochi", "Airbus-A320", 1200, {8, 45}, {12, 15}},
@@ -238,11 +237,11 @@ int compare_by_departure(const void* a, const void* b)
     const Flight* flightA = (const Flight*)a;
     const Flight* flightB = (const Flight*)b;
 
-    /* сначала часы, потом минуты */
+    // сначала часы, потом минуты 
     if (flightA->departure.hours < flightB->departure.hours) return -1;
     if (flightA->departure.hours > flightB->departure.hours) return 1;
 
-    /* если часы равны, сравниваем минуты */
+    // если часы равны, сравниваем минуты
     if (flightA->departure.minutes < flightB->departure.minutes) return -1;
     if (flightA->departure.minutes > flightB->departure.minutes) return 1;
 
@@ -290,7 +289,7 @@ int output_file(const char* filename, Flight flights[], int n)
     if (file == NULL) return 0;
 
     fwrite(&n, sizeof(int), 1, file);
-    /* передается как указатель на начало массива */
+    // передается как указатель на начало массива 
     fwrite(flights, sizeof(Flight), n, file);
 
     fclose(file);
@@ -317,7 +316,7 @@ int input_file(const char* filename, Flight flights[])
     return 1;
 }
 
-/* получить указатель на элемент массива */
+// получить указатель на элемент массива
 Flight* get_flight(Flight flights[], int index) 
 {
     return &flights[index];
@@ -336,4 +335,3 @@ void edit_flight(Flight* flight)
     flight->departure.hours = (flight->departure.hours + 1) % 24;
     printf("Время вылета сдвинуто на 1 час\n");
 }
-
