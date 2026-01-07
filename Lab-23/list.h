@@ -10,15 +10,15 @@ struct listitem
 
 typedef struct listitem* List;
 
-void initlist(List*); /* инициализация списка пустым содержимым */
-void insertfront_num(List*, int val);/* вставка в список перед узлом со значением поля number=val */
-void insertback_num(List*, int val);/* вставка в список перед узлом со значением поля number=val */
-void insertfront_str(List*, char* str); /* вставка в список перед узлом со значением str в поле name */
-void insertback_str(List*, char* str);/* вставка в список перед узлом со значением str в поле name */
-bool isempty(List*); /* проверяет, является ли список пустым*/
-int length(List); /* определение длины списка */
-void destroyItem(List*, List node); /* удаление заданного узла node из списка */
-struct listitem* getitem(List, int n); /* нахождение узла со значением n в поле number*/
-struct listitem* getitem(List, char* str); /* нахождение узла со значением str в поле name*/
+void initlist(List*); /* РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃРїРёСЃРєР° РїСѓСЃС‚С‹Рј СЃРѕРґРµСЂР¶РёРјС‹Рј */
+void insertfront_num(List*, int val);/* РІСЃС‚Р°РІРєР° РІ СЃРїРёСЃРѕРє РїРµСЂРµРґ СѓР·Р»РѕРј СЃРѕ Р·РЅР°С‡РµРЅРёРµРј РїРѕР»СЏ number=val */
+void insertback_num(List*, int val);/* РІСЃС‚Р°РІРєР° РІ СЃРїРёСЃРѕРє РїРµСЂРµРґ СѓР·Р»РѕРј СЃРѕ Р·РЅР°С‡РµРЅРёРµРј РїРѕР»СЏ number=val */
+void insertfront_str(List*, char* str); /* РІСЃС‚Р°РІРєР° РІ СЃРїРёСЃРѕРє РїРµСЂРµРґ СѓР·Р»РѕРј СЃРѕ Р·РЅР°С‡РµРЅРёРµРј str РІ РїРѕР»Рµ name */
+void insertback_str(List*, char* str);/* РІСЃС‚Р°РІРєР° РІ СЃРїРёСЃРѕРє РїРµСЂРµРґ СѓР·Р»РѕРј СЃРѕ Р·РЅР°С‡РµРЅРёРµРј str РІ РїРѕР»Рµ name */
+bool isempty(List*); /* РїСЂРѕРІРµСЂСЏРµС‚, СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃРїРёСЃРѕРє РїСѓСЃС‚С‹Рј*/
+int length(List); /* РѕРїСЂРµРґРµР»РµРЅРёРµ РґР»РёРЅС‹ СЃРїРёСЃРєР° */
+void destroyItem(List*, List node); /* СѓРґР°Р»РµРЅРёРµ Р·Р°РґР°РЅРЅРѕРіРѕ СѓР·Р»Р° node РёР· СЃРїРёСЃРєР° */
+struct listitem* getitem(List, int n); /* РЅР°С…РѕР¶РґРµРЅРёРµ СѓР·Р»Р° СЃРѕ Р·РЅР°С‡РµРЅРёРµРј n РІ РїРѕР»Рµ number*/
+struct listitem* getitem(List, char* str); /* РЅР°С…РѕР¶РґРµРЅРёРµ СѓР·Р»Р° СЃРѕ Р·РЅР°С‡РµРЅРёРµРј str РІ РїРѕР»Рµ name*/
 
 #endif /* _LIST_H */
