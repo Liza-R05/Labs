@@ -7,7 +7,7 @@
 
 #include "list.h"
 
-// Вспомогательная функция создания узла
+// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ С„СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ СѓР·Р»Р°
 struct listitem* create_node(int num, const char* name_str) 
 {
     struct listitem* node = (struct listitem*)malloc(sizeof(struct listitem));
@@ -161,38 +161,38 @@ int main()
     List mylist;
 
     initlist(&mylist);
-    printf("Список пуст? %s\n\n", isempty(&mylist) ? "Да" : "Нет");
+    printf("РЎРїРёСЃРѕРє РїСѓСЃС‚? %s\n\n", isempty(&mylist) ? "Р”Р°" : "РќРµС‚");
 
-    printf("Добавляем элементы:\n");
+    printf("Р”РѕР±Р°РІР»СЏРµРј СЌР»РµРјРµРЅС‚С‹:\n");
     insertfront_num(&mylist, 10);
     insertback_num(&mylist, 20);
-    insertfront_str(&mylist, "первый");
-    insertback_str(&mylist, "последний");
+    insertfront_str(&mylist, "РїРµСЂРІС‹Р№");
+    insertback_str(&mylist, "РїРѕСЃР»РµРґРЅРёР№");
 
-    printf("Длина списка: %d\n\n", length(mylist));
+    printf("Р”Р»РёРЅР° СЃРїРёСЃРєР°: %d\n\n", length(mylist));
 
-    printf("Поиск элементов:\n");
+    printf("РџРѕРёСЃРє СЌР»РµРјРµРЅС‚РѕРІ:\n");
     struct listitem* found = getitem_num(mylist, 10);
     if (found != NULL) 
     {
-        printf("\tНайден по номеру 10 \n\tИмя = '%s'\n", found->name);
+        printf("\tРќР°Р№РґРµРЅ РїРѕ РЅРѕРјРµСЂСѓ 10 \n\tРРјСЏ = '%s'\n", found->name);
     }
 
-    found = getitem_str(mylist, "первый");
+    found = getitem_str(mylist, "РїРµСЂРІС‹Р№");
     if (found != NULL) 
     {
-        printf("\tНайден по имени 'первый'\n\tНомер = %d\n", found->number);
+        printf("\tРќР°Р№РґРµРЅ РїРѕ РёРјРµРЅРё 'РїРµСЂРІС‹Р№'\n\tРќРѕРјРµСЂ = %d\n", found->number);
     }
 
-    printf("\nУдаление элемента:\n");
+    printf("\nРЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°:\n");
     found = getitem_num(mylist, 10);
     if (found != NULL)
     {
         destroyItem(&mylist, found);
-        printf("\tУдален элемент с номером 10\n");
+        printf("\tРЈРґР°Р»РµРЅ СЌР»РµРјРµРЅС‚ СЃ РЅРѕРјРµСЂРѕРј 10\n");
     }
 
-    printf("\nНовая длина: %d\n", length(mylist));
+    printf("\nРќРѕРІР°СЏ РґР»РёРЅР°: %d\n", length(mylist));
 
     return 0;
 }
