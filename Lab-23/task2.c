@@ -30,7 +30,7 @@ int main()
     IntList mylist;
     init_list(&mylist);
 
-    printf("Создаём список:\n");
+    printf("РЎРѕР·РґР°С‘Рј СЃРїРёСЃРѕРє:\n");
 
     for (int i = 0; i < 10; i++) 
     {
@@ -38,15 +38,15 @@ int main()
         add_to_end(&mylist, random_num);
     }
 
-    printf("\nИсходный список:\n");
+    printf("\nРСЃС…РѕРґРЅС‹Р№ СЃРїРёСЃРѕРє:\n");
     print_list(mylist);
-    printf("Длина: %d\n\n", list_length(mylist));
+    printf("Р”Р»РёРЅР°: %d\n\n", list_length(mylist));
 
     double average = calculate_average(mylist);
-    printf("\nСреднее арифметическое: %.2f\n\n", average);
+    printf("\nРЎСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ: %.2f\n\n", average);
 
-    printf("Удаляем элементы больше %.2f\n", average);
-    printf("Числа: ");
+    printf("РЈРґР°Р»СЏРµРј СЌР»РµРјРµРЅС‚С‹ Р±РѕР»СЊС€Рµ %.2f\n", average);
+    printf("Р§РёСЃР»Р°: ");
 
     struct Node* current = mylist;
     while (current != NULL)
@@ -61,15 +61,15 @@ int main()
 
     remove_than_average(&mylist, average);
 
-    printf("\nПосле преобразования:\n");
+    printf("\nРџРѕСЃР»Рµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ:\n");
     if (mylist == NULL) 
     {
-        printf("Список пуст (элементы были больше среднего).\n");
+        printf("РЎРїРёСЃРѕРє РїСѓСЃС‚ (СЌР»РµРјРµРЅС‚С‹ Р±С‹Р»Рё Р±РѕР»СЊС€Рµ СЃСЂРµРґРЅРµРіРѕ).\n");
     }
     else 
     {
         print_list(mylist);
-        printf("Длина: %d\n", list_length(mylist));
+        printf("Р”Р»РёРЅР°: %d\n", list_length(mylist));
     }
 
     clear_list(&mylist);
@@ -108,11 +108,11 @@ void print_list(IntList lst)
 {
     if (lst == NULL) 
     {
-        printf("Список пуст.\n");
+        printf("РЎРїРёСЃРѕРє РїСѓСЃС‚.\n");
         return;
     }
 
-    printf("Содержимое списка: ");
+    printf("РЎРѕРґРµСЂР¶РёРјРѕРµ СЃРїРёСЃРєР°: ");
     while (lst != NULL)
     {
         printf("%d", lst->value);
@@ -157,7 +157,7 @@ void remove_than_average(IntList* lst, double average)
 {
     if (*lst == NULL) return;
 
-    // удаляем элементы из начала списка
+    // СѓРґР°Р»СЏРµРј СЌР»РµРјРµРЅС‚С‹ РёР· РЅР°С‡Р°Р»Р° СЃРїРёСЃРєР°
     while (*lst != NULL && (*lst)->value > average) 
     {
         struct Node* temp = *lst;
@@ -167,7 +167,7 @@ void remove_than_average(IntList* lst, double average)
 
     if (*lst == NULL) return;
 
-    // удаляем элементы из середины/конца списка
+    // СѓРґР°Р»СЏРµРј СЌР»РµРјРµРЅС‚С‹ РёР· СЃРµСЂРµРґРёРЅС‹/РєРѕРЅС†Р° СЃРїРёСЃРєР°
     struct Node* current = *lst;
     while (current->next != NULL)
     {
