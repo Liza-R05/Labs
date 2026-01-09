@@ -41,12 +41,20 @@ bool isempty(List* lst)
 int length(List lst) 
 {
     int count = 0;
-    while (lst != NULL) 
+    if (lst == NULL) 
     {
-        count++;
-        lst = lst->next;
+        printf("Ошибка!");
+        return -1; 
     }
+    else
+    {
+    while (lst != NULL) 
+        {
+            count++;
+            lst = lst->next;
+        }
     return count;
+    }
 }
 
 void insertfront_num(List* lst, int val) 
@@ -196,3 +204,4 @@ int main()
 
     return 0;
 }
+
