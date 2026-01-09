@@ -43,18 +43,14 @@ int length(List lst)
     int count = 0;
     if (lst == NULL) 
     {
-        printf("Ошибка!");
-        return -1; 
+        return 0; 
     }
-    else
-    {
-        while (lst != NULL) 
-            {
-                count++;
-                lst = lst->next;
-            }
-        return count;
-    }
+    while (lst != NULL) 
+        {
+            count++;
+            lst = lst->next;
+        }
+    return count;
 }
 
 void insertfront_num(List* lst, int val) 
@@ -204,5 +200,6 @@ int main()
 
     return 0;
 }
+
 
 
