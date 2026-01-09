@@ -48,12 +48,12 @@ int length(List lst)
     }
     else
     {
-    while (lst != NULL) 
-        {
-            count++;
-            lst = lst->next;
-        }
-    return count;
+        while (lst != NULL) 
+            {
+                count++;
+                lst = lst->next;
+            }
+        return count;
     }
 }
 
@@ -204,4 +204,5 @@ int main()
 
     return 0;
 }
+
 
